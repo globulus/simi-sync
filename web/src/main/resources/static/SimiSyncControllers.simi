@@ -1,0 +1,49 @@
+import "./Stdlib/File.simi"
+import "./Stdlib/CodeBlocks.simi"
+#import "./SimiSyncCommons.simi"
+
+class_ SimiSyncControllers:
+
+    class_ Route:
+        def init(endpoint, verb): pass
+    end
+
+    class_ Router:
+
+        def parseControllers(resourceLoaderWrapper):
+            # By convention, all controller files should live in a directory named "controller" and its subdirectories
+            router = $[]
+            for file in File.listAll("static/controllers", "simi", true, resourceLoaderWrapper):
+                # Read and interpret the content of the file
+                controllerCode = File.readString(file.path).split("\n")
+                $start = 0
+                for e in controllerCode.enumerate():
+                    [i, line] = e
+                    if line.startsWith("class"):
+                        $start = i
+                        break
+                    end
+                end
+                controllerClass = gu String.from(controllerCode.slice($start, controllerCode.len() + 1), "\n")
+                # Each class should have a proper ControllerClass annotation
+                for e in controllerClass.enumerate().filter(def e: e.value is Function):
+                    value = controllerClass.(e.key)
+                    route = @_extractAnnot(value, SimiSyncControllers.Route)
+                    if not route: continue
+                    router.(route.toString()) = value
+                end
+            end
+            @router = router
+        end
+
+        def route(endpoint, verb, payload):
+            route = SimiSyncControllers.Route(endpoint, verb)
+            print "Routing: " + route
+            func = @router.(route.toString())
+            print "Found route: " + func
+            return func(payload)
+        end
+
+        def _extractAnnot(field, annotClass): return ?(!!field).filter(def a: a is annotClass).first()
+    end
+end

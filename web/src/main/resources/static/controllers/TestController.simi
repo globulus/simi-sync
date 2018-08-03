@@ -1,0 +1,9 @@
+import "./SimiSyncControllers.simi"
+
+class TestController:
+    !SimiSyncControllers.Route("/test", "POST")
+    def testPost(body): return "FROM SIMI: " + body
+
+    !SimiSyncControllers.Route("/test", "GET")
+    def testGet(args): return "kme"
+end

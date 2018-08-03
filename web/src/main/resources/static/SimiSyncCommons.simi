@@ -1,0 +1,5 @@
+class_ SimiSyncCommons:
+    class_ Parser:
+        def _extractAnnot(field, annotClass): return ?(!!field).filter(def a: a is annotClass).first()
+    end
+end

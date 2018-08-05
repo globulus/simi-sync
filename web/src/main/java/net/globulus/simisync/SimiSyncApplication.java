@@ -47,6 +47,9 @@ public class SimiSyncApplication {
 			ActiveSimi.load("SimiSyncModels.simi", "SimiSyncControllers.simi");
 			ActiveSimi.eval("SimiSyncControllers.Router", "parseControllers",
 					new SimiValue.Object(resourceLoaderWrapper));
+			ActiveSimi.eval("SimiSyncModels.ModelParser", "parse",
+					new SimiValue.Number(1),
+					new SimiValue.Object(resourceLoaderWrapper));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -2,8 +2,8 @@ import "./SimiSyncControllers.simi"
 
 class TestController:
     !SimiSyncControllers.Route("/test", "POST")
-    def testPost(body): return "FROM SIMI: " + body
+    def testPost(request): return "FROM SIMI: " + request.body
 
     !SimiSyncControllers.Route("/test", "GET")
-    def testGet(args): return "kme"
+    def testGet(request): return "SIMI HEADERS: " + request.headers
 end

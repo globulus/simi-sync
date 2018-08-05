@@ -43,19 +43,27 @@ public class SimiFile {
     @SimiJavaMethod
     public static SimiProperty readString(SimiObject self, BlockInterpreter interpreter, SimiProperty path) {
         try {
-            String pathString = path.getValue().getString();
-            if (!pathString.startsWith("file://")) {
-                pathString = "file://" + pathString;
-            }
-            String content = new BufferedReader(new InputStreamReader(new UrlResource(pathString).getInputStream()))
-                    .lines()
-                    .collect(Collectors.joining("\n"));
+            String content = new String(Files.readAllBytes(Paths.get(path.getValue().getString())));
             return new SimiValue.String(content);
         } catch (IOException e) {
             e.printStackTrace();
             Utils.raiseIoException(e, interpreter);
             return null;
         }
+//        try {
+//            String pathString = path.getValue().getString();
+//            if (!pathString.startsWith("file://")) {
+//                pathString = "file://" + pathString;
+//            }
+//            String content = new BufferedReader(new InputStreamReader(new UrlResource(pathString).getInputStream()))
+//                    .lines()
+//                    .collect(Collectors.joining("\n"));
+//            return new SimiValue.String(content);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            Utils.raiseIoException(e, interpreter);
+//            return null;
+//        }
     }
 
     @SimiJavaMethod

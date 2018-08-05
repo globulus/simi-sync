@@ -9,7 +9,9 @@ class_ SimiSyncControllers:
     end
 
     class_ Request:
-        def init(headers, body): pass
+        def init(headers, body): @init(headers, body, nil, nil)
+        def init(headers, body, query): @init(headers, body, query, nil)
+        def init(headers, body, query, path): pass
     end
 
     class_ Router:
@@ -26,18 +28,59 @@ class_ SimiSyncControllers:
                     value = controllerClass.(e.key)
                     route = @extractAnnot(value, SimiSyncControllers.Route)
                     if not route: continue
-                    router.(route.toString()) = value
+                    verb = route.verb
+                    if verb not in router: router.(verb) = $[]
+                    router.(verb).(route.endpoint) = value
                 end
             end
             @router = router
         end
 
-        def route(endpoint, verb, headers, body):
+        def route(endpoint, verb, headers, query, body):
+            queryObj = @_parseQuery(query)
             route = SimiSyncControllers.Route(endpoint, verb)
             print "Routing: " + route
-            func = @router.(route.toString())
-            print "Found route: " + func
-            return func(SimiSyncControllers.Request(headers, body))
+            match = @_matchRoute(route)
+            print "Found route: " + match
+            if match is Function: return match(SimiSyncControllers.Request(headers, body, queryObj))
+            return match.func(SimiSyncControllers.Request(headers, body, queryObj, match.path))
+        end
+
+        def _matchRoute(route):
+            for e in @router.(route.verb).enumerate():
+                [endpoint, func] = e
+                path = route.endpoint
+                if endpoint == path: return func
+                endpointSplit = endpoint.split('/')
+                pathSplit = path.split('/')
+                if endpointSplit.len() != pathSplit.len(): continue
+
+                # Check for matches amongst paths with components
+                $matches = true
+                pathObj = $[]
+                for ee in endpointSplit.enumerate():
+                    [i, component] = ee
+                    pathComponent = pathSplit.(i)
+                    pathObj.clear()
+                    if component.startsWith('$'): pathObj.(component.substring(1)) = pathComponent # Remove starting $
+                    elsif component != pathComponent:
+                        $matches = false
+                        break
+                    end
+                end
+                if $matches: return [func = func, path = pathObj]
+            end
+            return nil
+        end
+
+        def _parseQuery(query):
+            if not query: return []
+            queryObj = $[]
+            for comp in query.split('&'):
+                index = comp.indexOf('=')
+                queryObj.(comp.substring(0, index)) = comp.substring(index + 1)
+            end
+            return queryObj
         end
     end
 end

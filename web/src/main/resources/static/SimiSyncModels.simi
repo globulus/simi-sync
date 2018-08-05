@@ -32,7 +32,6 @@ class_ SimiSyncModels:
             for file in File.listAll("static/models", "simi", true, resourceLoaderWrapper):
                 if not $dirPath:
                     $dirPath = file.path.substring(0, file.path.lastIndexOf('/') + 1) +  "clientModels/" + version + "/"
-                    print "found dirpath " + $dirPath
                 end
                 # Read and interpret the content of the file
                 modelCode = File.readString(file.path)
@@ -56,9 +55,7 @@ class_ SimiSyncModels:
                     end
                 end
                 clientCode = classComposer.getString()
-                print clientCode
                 f = File($dirPath + className + ".simi")
-                print f
                 writer = WriteStream(f)
                 writer.write(clientCode)
                 rescue ex:

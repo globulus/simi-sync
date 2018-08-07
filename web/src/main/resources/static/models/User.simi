@@ -2,12 +2,19 @@ import "./SimiSyncModels.simi"
 
 !SimiSyncModels.Model(1)
 class User:
-    !SimiSyncModels.Field(false, 1, "un")
-    username = ""
+    !SimiSyncModels.Field()
+    guid = 0
+
+    !SimiSyncModels.Field()
+    email = 0
 
     !SimiSyncModels.Field(true, 1)
-    password = ""
+    password = 0
 
-    !SimiSyncModels.Method()
-    def method(): return @username + "aaaa"
+    !SimiSyncModels.Field(true, 1)
+    cookie = 0
+
+    def init(guid is String, email is String, password is String): pass
+
+    def updateCookie(): @cookie = clock().toString()
 end

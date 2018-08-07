@@ -1,0 +1,25 @@
+import "./SimiSyncModels.simi"
+import "./models/Brand.simi"
+
+!SimiSyncModels.Model(1)
+class Beer:
+    !SimiSyncModels.Field()
+    guid = 0
+
+    !SimiSyncModels.Field()
+    date = 0
+
+    !SimiSyncModels.Field(false, 1, Brand.Mapper())
+    brand = 0
+
+    !SimiSyncModels.Field()
+    quantity = 0
+
+    !SimiSyncModels.Field(true)
+    user = 0
+
+    !SimiSyncModels.Method()
+    def init(guid is String, date is Date, brand is Brand, quantity is Number): pass
+
+    def setUser(user is User): @user = user
+end

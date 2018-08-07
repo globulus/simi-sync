@@ -1,0 +1,21 @@
+import "./SimiSyncModels.simi"
+import "./db/NotDb.simi"
+
+!SimiSyncModels.Model(1)
+class Brand:
+    !SimiSyncModels.Field()
+    guid = 0
+
+    !SimiSyncModels.Field()
+    name = 0
+
+    !SimiSyncModels.Field()
+    size = 0
+
+    !SimiSyncModels.Method()
+    def init(guid is String, name is String, size is Number): pass
+
+    class_ Mapper(SimiSyncModels.ClientMapper):
+        def init(): @init("0", def b: return b.guid, def s: return NotDb.singleton.find("Brand", s))
+    end
+end

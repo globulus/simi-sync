@@ -1,21 +1,27 @@
 import "./Stdlib/File.simi"
 import "./Stdlib/CodeBlocks.simi"
 import "./SimiSyncCommons.simi"
+import "./db/NotDb.simi"
 
 class_ SimiSyncModels:
 
     # Model annotation class
     class_ Model:
         def init(version): pass
-        def init(version, clientName): pass
     end
 
     # Model field annotation class
     class_ Field:
         def init(): @init(false, 1)
-        def init(serverOnly): pass
+        def init(serverOnly): @init(serverOnly, 1)
         def init(serverOnly, version): pass
-        def init(serverOnly, version, clientName): pass
+        def init(serverOnly, version, clientMapper): pass
+        def init(serverOnly, version, clientMapper, clientName): pass
+    end
+
+    # ClienrMapper usually maps an object to a simpler data type, such as string
+    class ClientMapper:
+        def init(type, from, to): pass
     end
 
     # Model method annotation class
@@ -29,6 +35,7 @@ class_ SimiSyncModels:
             import CodeBlocks
             # By convention, all model files should live in a directory named "models" and its subdirectories
             $dirPath = nil
+            dbClassNames = Object.array()
             for file in File.listAll("static/models", "simi", true, resourceLoaderWrapper):
                 if not $dirPath:
                     $dirPath = file.path.substring(0, file.path.lastIndexOf('/') + 1) +  "clientModels/" + version + "/"
@@ -39,8 +46,10 @@ class_ SimiSyncModels:
                 # Each class should have a proper ModelClass annotation
                 modelClassAnnot = @extractAnnot(modelClass, SimiSyncModels.Model)
                 if not modelClassAnnot : continue
-                className = modelClassAnnot.clientName ?? ClassCode(modelClass).name
+                className = ClassCode(modelClass).name
+                dbClassNames.append(className)
                 classComposer = ClassComposer(className)
+                clientMappers = $[]
                 for e in modelClass.enumerate():
                     key = e.key
                     value = modelClass.(key)
@@ -51,8 +60,17 @@ class_ SimiSyncModels:
                     else:
                         fieldAnnot = @extractAnnot(value, SimiSyncModels.Field)
                         if not fieldAnnot or fieldAnnot.serverOnly or fieldAnnot.version > version: continue
-                        classComposer.field(fieldAnnot.clientName ?? key, value)
+                        clientMapper = fieldAnnot.clientMapper
+                        fieldName = fieldAnnot.clientName ?? key
+                        classComposer.field(fieldName, ?clientMapper.type ?? value)
+                        if clientMapper:
+                            clientMappers.(fieldName) = clientMapper
+                        end
                     end
+                end
+                if not clientMappers.isEmpty():
+                    clientMappersCode = ivic clientMappers # We need to remove the trailing newline
+                    classComposer.add("def mapField(name): return " + clientMappersCode.substring(0, clientMappersCode.len() - 1) + ".(name)")
                 end
                 clientCode = classComposer.getString()
                 f = File($dirPath + className + ".simi")
@@ -63,6 +81,7 @@ class_ SimiSyncModels:
                     writer.close()
                 end
             end
+            NotDb.setupSingleton(dbClassNames)
         end
     end
 end

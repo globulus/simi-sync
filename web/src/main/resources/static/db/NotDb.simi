@@ -1,0 +1,48 @@
+import "./Stdlib/CodeBlocks.simi"
+import CodeBlocks
+
+class NotDb:
+    def init(classNames):
+        @_db = $[]
+        for className in classNames:
+            @_db.(className) = $[]
+        end
+    end
+
+    def setupSingleton(classNames): @singleton = NotDb(classNames)
+
+    def insert(obj): @_collection(obj).(obj.guid) = obj
+
+    def delete(obj): @_collection(obj).(obj.guid) = nil
+
+    def query(obj):
+        if obj.isArray():
+            collection = @_collection(obj.0)
+            for o in obj:
+                res = @_queryIndividual(o, collection)
+                if res: return res
+            end
+            return nil
+        end
+        return @_queryIndividual(obj, @_collection(obj))
+    end
+
+    def find(className, guid): return @_db.(className).(guid)
+
+    def _queryIndividual(obj, collection):
+        if obj.guid: return collection.(obj.guid)
+        for other in collection:
+            $match = true
+            for e in obj.enumerate():
+                if value != other.(key):
+                    $match = false
+                    break
+                end
+            end
+            if $match: return other
+        end
+        return nil
+    end
+
+    def _collection(obj): return @_db.(ClassCode(obj.("class")).name)
+end

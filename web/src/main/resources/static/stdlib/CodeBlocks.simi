@@ -20,6 +20,8 @@ class_ CodeBlocks:
 
         def method(m): @body.add(ivic m).add("\n")
 
+        def add(code): @body.add(code).add("\n")
+
         def getString():
             @body.add("end")
             s = @body.build()

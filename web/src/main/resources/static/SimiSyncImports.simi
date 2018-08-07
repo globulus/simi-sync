@@ -1,0 +1,24 @@
+import "./Stdlib/File.simi"
+
+class_ SimiSyncImports:
+    def prepareImports(resourceLoaderWrapper):
+        imports = Object.array()
+        $dirPath = nil
+        for file in File.listAll("static/models", "simi", true, resourceLoaderWrapper):
+            lastIndex = file.path.lastIndexOf('/')
+            name = file.path.substring(lastIndex + 1)
+            if not $dirPath:
+                $dirPath = file.path.substring(0, lastIndex)
+                $dirPath = $dirPath.substring(0, $dirPath.lastIndexOf('/') + 1)
+            end
+            imports.append("import \"./models/" + name + "\"")
+        end
+        f = File($dirPath + "PreparedImports.simi")
+        writer = WriteStream(f)
+        writer.write(String.from(imports, "\n") + "\n")
+        rescue ex:
+            if ex: print ex.message
+            writer.close()
+        end
+    end
+end

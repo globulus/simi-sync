@@ -26,7 +26,10 @@ public class SimiSyncApplication {
 			@Override
 			public String readFile(String s) {
 				try {
-					return StreamUtils.copyToString(new ClassPathResource("static/" + s).getInputStream(), Charset.defaultCharset());
+					if (!s.startsWith("/")) {
+						s = "static/" + s;
+					}
+					return StreamUtils.copyToString(new ClassPathResource(s).getInputStream(), Charset.defaultCharset());
 				} catch (IOException e) {
 					e.printStackTrace();
 					return null;
@@ -44,7 +47,10 @@ public class SimiSyncApplication {
 			}
 		});
 		try {
-			ActiveSimi.load("SimiSyncModels.simi", "SimiSyncControllers.simi");
+			ActiveSimi.load("SimiSyncImports.simi");
+			ActiveSimi.eval("SimiSyncImports", "prepareImports",
+					new SimiValue.Object(resourceLoaderWrapper));
+			ActiveSimi.load("PreparedImports.simi", "SimiSyncModels.simi", "SimiSyncControllers.simi");
 			ActiveSimi.eval("SimiSyncControllers.Router", "parseControllers",
 					new SimiValue.Object(resourceLoaderWrapper));
 			ActiveSimi.eval("SimiSyncModels.ModelParser", "parse",

@@ -24,7 +24,8 @@ public class SimiSyncController {
     @RequestMapping("/**")
     public ResponseEntity<String> route(HttpServletRequest request, HttpServletResponse response) {
         String body = null;
-        if (request.getMethod().equalsIgnoreCase("post")) {
+        if (request.getMethod().equalsIgnoreCase("post")
+                || request.getMethod().equalsIgnoreCase("put")) {
             try {
                 body = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
             } catch (IOException e) {

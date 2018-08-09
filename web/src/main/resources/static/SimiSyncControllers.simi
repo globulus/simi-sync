@@ -1,6 +1,7 @@
 import "./Stdlib/File.simi"
 import "./Stdlib/CodeBlocks.simi"
 import "./SimiSyncCommons.simi"
+import CodeBlocks
 
 class_ SimiSyncControllers:
 
@@ -14,26 +15,51 @@ class_ SimiSyncControllers:
         def init(headers, body, query, path): pass
     end
 
+    class_ ClientTask:
+        def init(version): pass
+        def init(version, payloadVerification, headers, query, successCodes): pass
+    end
+
     class_ Router:
         import SimiSyncCommons.Parser
 
-        def parseControllers(resourceLoaderWrapper):
+        def parseControllers(version, resourceLoaderWrapper):
             # By convention, all controller files should live in a directory named "controller" and its subdirectories
             router = $[]
+            $dirPath = nil
+            clientTasks = ClassComposer("ClientTasks", "$")
             for file in File.listAll("static/controllers", "simi", true, resourceLoaderWrapper):
+                if not $dirPath:
+                    $dirPath = file.path.substring(0, file.path.lastIndexOf('/') + 1) + "clientTasks/" + version + "/"
+                end
                 # Read and interpret the content of the file
                 controllerCode = File.readString(file.path)
                 controllerClass = gu @removeImports(controllerCode)
                 for e in controllerClass.enumerate().filter(def e: e.value is Function):
+                    if e.key.startsWith('_'): continue
                     value = controllerClass.(e.key)
                     route = @extractAnnot(value, SimiSyncControllers.Route)
                     if not route: continue
                     verb = route.verb
                     if verb not in router: router.(verb) = $[]
                     router.(verb).(route.endpoint) = value
+
+                    clientTask = @extractAnnot(value, SimiSyncControllers.ClientTask)
+                    if clientTask: clientTasks.add(@_getClientTask(route, clientTask))
                 end
             end
             @router = router
+
+            clientTasksCode = clientTasks.getString()
+            print "CLIENT TASKS"
+            print clientTasksCode
+            f = File($dirPath + clientTasks.name + ".simi")
+            writer = WriteStream(f)
+            writer.write(clientTasksCode)
+            rescue ex:
+                if ex: print ex.message
+                writer.close()
+            end
         end
 
         def route(endpoint, verb, headers, query, body):
@@ -42,8 +68,9 @@ class_ SimiSyncControllers:
             print "Routing: " + route
             match = @_matchRoute(route)
             print "Found route: " + match
-            if match is Function: return match(SimiSyncControllers.Request(headers, body, queryObj))
-            return match.func(SimiSyncControllers.Request(headers, body, queryObj, match.path))
+            simiBody = ife(body, :(gu body), nil)
+            if match is Function: return match(SimiSyncControllers.Request(headers, simiBody, queryObj))
+            return match.func(SimiSyncControllers.Request(headers, simiBody, queryObj, match.path))
         end
 
         def _matchRoute(route):
@@ -82,5 +109,58 @@ class_ SimiSyncControllers:
             end
             return queryObj
         end
+
+        def _getClientTask(route, clientTask):
+            rawEndpoint = route.endpoint.substring(1)
+            slashIndex = rawEndpoint.indexOf('/') ?? rawEndpoint.len()
+            endpoint = rawEndpoint.0.upperCased() + rawEndpoint.substring(1, slashIndex)
+            name = route.verb.lowerCased() + endpoint
+            params = Object.array()
+            pathComponents = @_extractPathComponents(route)
+            if not pathComponents.isEmpty(): params.addAll(pathComponents)
+            if clientTask.headers: params.addAll(clientTask.headers)
+            if clientTask.query: params.addAll(clientTask.query)
+            if route.verb in ["POST", "PUT"]: params.append("body")
+            params.append("success is Function")
+            params.append("error is Function")
+            for i in ?clientTask.payloadVerification.len().times():
+                print "i " + i
+                params.(i) = params.(i) + " is " + ClassCode(clientTask.payloadVerification.(i)).name
+            end
+            print "Client task name: " + name
+            print params
+
+            composer = FunctionComposer(name, params)
+
+            url = String.builder().add("@baseUrl + \"").add(route.endpoint).add("\"")
+            for path in pathComponents:
+                url.add(".replacing(\"$").add(path).add("\", ").add(path).add(")")
+            end
+            if clientTask.query:
+                url.add(" + \"?")
+                for q in clientTask.query:
+                    url.add(q).add("=").add("\"+").add(q).add("+\"&")
+                end
+                url.add("\"")
+            end
+            composer.line("url = " + url.build())
+            headers = Object.array()
+            for header in clientTask.headers:
+                headers.append(header + "=" + header)
+            end
+            headersString = "[" + String.from(headers, ", ") + "]"
+
+            successCodes = clientTask.successCodes ?? [200]
+            successCodesString = ivic successCodes
+            composer.line("Net." + route.verb.lowerCased() + "([url = url, json = body, headers = " + headersString + "], def response:")
+            composer.line("   if response.code in " + successCodesString.substring(0, successCodesString.len() - 1) + ": success(response)")
+            composer.line("   else: error(response)")
+            composer.line("end)")
+            return composer.getString()
+        end
+
+        def _extractPathComponents(route): return route.endpoint.split('/')\
+            .filter(def p: p.startsWith('$'))\
+            .map(def p: p.substring(1))
     end
 end

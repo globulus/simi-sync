@@ -46,19 +46,16 @@ public class SimiSyncApplication {
 				}
 			}
 		});
-		try {
-			ActiveSimi.load("SimiSyncImports.simi");
-			ActiveSimi.eval("SimiSyncImports", "prepareImports",
-					new SimiValue.Object(resourceLoaderWrapper));
-			ActiveSimi.load("PreparedImports.simi", "SimiSyncModels.simi", "SimiSyncControllers.simi");
-			ActiveSimi.eval("SimiSyncControllers.Router", "parseControllers",
-					new SimiValue.Object(resourceLoaderWrapper));
-			ActiveSimi.eval("SimiSyncModels.ModelParser", "parse",
-					new SimiValue.Number(1),
-					new SimiValue.Object(resourceLoaderWrapper));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		ActiveSimi.load("SimiSyncImports.simi");
+		ActiveSimi.eval("SimiSyncImports", "prepareImports",
+				new SimiValue.Object(resourceLoaderWrapper));
+		ActiveSimi.load("PreparedImports.simi", "SimiSyncModels.simi", "SimiSyncControllers.simi");
+		ActiveSimi.eval("SimiSyncControllers.Router", "parseControllers",
+				new SimiValue.Number(1),
+				new SimiValue.Object(resourceLoaderWrapper));
+		ActiveSimi.eval("SimiSyncModels.ModelParser", "parse",
+				new SimiValue.Number(1),
+				new SimiValue.Object(resourceLoaderWrapper));
 		SpringApplication.run(SimiSyncApplication.class, args);
 	}
 }

@@ -14,7 +14,10 @@ class User:
     !SimiSyncModels.Field(true, 1)
     cookie = 0
 
+    !SimiSyncModels.Method()
+    def init(email is String, password is String): pass
+    def init(email is String): pass
     def init(guid is String, email is String, password is String): pass
 
-    def updateCookie(): @cookie = clock().toString()
+    def updateCookie(): @cookie = guid()
 end

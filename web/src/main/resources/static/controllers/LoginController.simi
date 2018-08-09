@@ -1,0 +1,25 @@
+import "./SimiSyncControllers.simi"
+import "./db/NotDb.simi"
+import "./models/User.simi"
+
+class LoginController:
+    !SimiSyncControllers.Route("/login", "POST")
+    !SimiSyncControllers.ClientTask(1, [User], nil, nil, [200, 201])
+    def login(request):
+        credentials = request.body
+        print "creds " + credentials
+        user = NotDb.singleton.query(User(credentials.email)).first()
+        print "found user: " + user
+        if user:
+            if user.password == credentials.password: return user.cookie
+            else: return [code = 401, body = "Invalid password"]
+        end
+        else:
+            signup = User(guid(), credentials.email, credentials.password)
+            signup.updateCookie()
+            print "Signup " + signup
+            NotDb.singleton.insert(signup)
+            return [code = 201, body = signup.cookie]
+        end
+    end
+end

@@ -9,7 +9,12 @@ class NotDb:
         end
     end
 
-    def setupSingleton(classNames): @singleton = NotDb(classNames)
+    def setupSingleton(classNames):
+        @singleton = NotDb(classNames)
+        @singleton.insert(Brand(guid(), "Osjecko", 0.5))
+        @singleton.insert(Brand(guid(), "Karlovacko", 0.5))
+        @singleton.insert(Brand(guid(), "Ozujsko", 0.33))
+    end
 
     def insert(obj): @_collection(obj).(obj.guid) = obj
 
@@ -27,21 +32,30 @@ class NotDb:
         return @_queryIndividual(obj, @_collection(obj))
     end
 
+    def queryAll(clazz): return @_db.(ClassCode(clazz).name).values()
+
     def find(className, guid): return @_db.(className).(guid)
+
+    def findUser(request):
+        cookie = request.headers.simicookie
+        return ife(cookie, :@_queryIndividual([cookie = cookie], @_db.("User")), nil)
+    end
 
     def _queryIndividual(obj, collection):
         if obj.guid: return collection.(obj.guid)
-        for other in collection:
+        matches = Object.array()
+        for other in collection.values():
             $match = true
             for e in obj.enumerate():
+                [key, value] = e
                 if value != other.(key):
                     $match = false
                     break
                 end
             end
-            if $match: return other
+            if $match: matches.append(other)
         end
-        return nil
+        return matches
     end
 
     def _collection(obj): return @_db.(ClassCode(obj.("class")).name)

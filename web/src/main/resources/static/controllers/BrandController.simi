@@ -1,0 +1,9 @@
+import "./SimiSyncControllers.simi"
+import "./db/NotDb.simi"
+import "./models/Brand.simi"
+
+class BrandController:
+    !SimiSyncControllers.Route("/brands", "GET")
+    !SimiSyncControllers.ClientTask(1)
+    def getBrands(request): return ivic NotDb.singleton.queryAll(Brand)
+end

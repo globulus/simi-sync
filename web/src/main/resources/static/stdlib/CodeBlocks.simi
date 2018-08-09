@@ -12,8 +12,11 @@ class_ CodeBlocks:
     end
 
     class_ ClassComposer:
-        def init(name):
-            @body = String.builder().add("class ").add(name).add(":\n")
+        def init(name): @init(name, "")
+
+        def init(name, type):
+            @name = name
+            @body = String.builder().add("class").add(type).add(" ").add(name).add(":\n")
         end
 
         def field(key, value): @body.add(key).add(" = ").add(ivic value).add("\n")
@@ -30,6 +33,23 @@ class_ CodeBlocks:
         end
 
         def getClass(): return gu @getString()
+    end
+
+    class_ FunctionComposer:
+        def init(name, params):
+            @body = String.builder().add("def ").add(name).add("(").add(String.from(params, ", ")).add("):\n")
+        end
+
+        def line(line): @body.add("   ").add(line).add("\n")
+
+        def getString():
+            @body.add("end")
+            s = @body.build()
+            @body = nil
+            return s
+        end
+
+        def getFunction(): return gu @getString()
     end
 
     class_ FunctionCode:

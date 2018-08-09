@@ -15,11 +15,10 @@ class Beer:
     !SimiSyncModels.Field()
     quantity = 0
 
-    !SimiSyncModels.Field(true)
-    user = 0
+    def init(user is String): pass
 
     !SimiSyncModels.Method()
-    def init(guid is String, date is Date, brand is Brand, quantity is Number): pass
+    def init(guid is String, date is Date, brand is String, quantity is Number): pass
 
     def setUser(user is User): @user = user
 end

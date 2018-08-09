@@ -1,5 +1,4 @@
 import "./SimiSyncModels.simi"
-import "./db/NotDb.simi"
 
 !SimiSyncModels.Model(1)
 class Brand:

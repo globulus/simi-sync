@@ -6,8 +6,9 @@ class_ CodeBlocks:
     class_ ClassCode: # Can't be named Class because of the Class metaclass
         def init(c):
             @ref = c
-            code = c.toString()
-            @name = code.substring(0, code.indexOf('('))
+            code = c.toString() ?? ("" + c)
+            firstLine = code.substring(0, code.indexOf('['))
+            @name = firstLine.substring(0, firstLine.indexOf('(') ?? firstLine.indexOf(' = '))
         end
     end
 

@@ -1,7 +1,7 @@
 import "./SimiSyncModels.simi"
 
 !SimiSyncModels.Model(1)
-class Brand:
+class$ Brand:
     !SimiSyncModels.Field()
     guid = 0
 

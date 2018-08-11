@@ -10,9 +10,9 @@ class_ SimiSyncControllers:
     end
 
     class_ Request:
-        def init(headers, body): @init(headers, body, nil, nil)
-        def init(headers, body, query): @init(headers, body, query, nil)
-        def init(headers, body, query, path): pass
+        def init(resourceLoaderWrapper, headers, body): @init(resourceLoaderWrapper, headers, body, nil, nil)
+        def init(resourceLoaderWrapper, headers, body, query): @init(resourceLoaderWrapper, headers, body, query, nil)
+        def init(resourceLoaderWrapper, headers, body, query, path): pass
     end
 
     class_ ClientTask:
@@ -24,6 +24,7 @@ class_ SimiSyncControllers:
         import SimiSyncCommons.Parser
 
         def parseControllers(version, resourceLoaderWrapper):
+            @resourceLoaderWrapper = resourceLoaderWrapper
             # By convention, all controller files should live in a directory named "controller" and its subdirectories
             router = $[]
             $dirPath = nil
@@ -51,8 +52,6 @@ class_ SimiSyncControllers:
             @router = router
 
             clientTasksCode = clientTasks.getString()
-            print "CLIENT TASKS"
-            print clientTasksCode
             f = File($dirPath + clientTasks.name + ".simi")
             writer = WriteStream(f)
             writer.write(clientTasksCode)
@@ -69,8 +68,8 @@ class_ SimiSyncControllers:
             match = @_matchRoute(route)
             print "Found route: " + match
             simiBody = ife(body, :(gu body), nil)
-            if match is Function: return match(SimiSyncControllers.Request(headers, simiBody, queryObj))
-            return match.func(SimiSyncControllers.Request(headers, simiBody, queryObj, match.path))
+            if match is Function: return match(SimiSyncControllers.Request(@resourceLoaderWrapper, headers, simiBody, queryObj))
+            return match.func(SimiSyncControllers.Request(@resourceLoaderWrapper, headers, simiBody, queryObj, match.path))
         end
 
         def _matchRoute(route):
@@ -118,18 +117,14 @@ class_ SimiSyncControllers:
             params = Object.array()
             pathComponents = @_extractPathComponents(route)
             if not pathComponents.isEmpty(): params.addAll(pathComponents)
-            if clientTask.headers: params.addAll(clientTask.headers)
             if clientTask.query: params.addAll(clientTask.query)
             if route.verb in ["POST", "PUT"]: params.append("body")
-            params.append("success is Function")
-            params.append("error is Function")
             for i in ?clientTask.payloadVerification.len().times():
-                print "i " + i
                 params.(i) = params.(i) + " is " + ClassCode(clientTask.payloadVerification.(i)).name
             end
-            print "Client task name: " + name
-            print params
-
+            if clientTask.headers: params.addAll(clientTask.headers.map(def h: h + " is String"))
+            params.append("success is Function")
+            params.append("error is Function")
             composer = FunctionComposer(name, params)
 
             url = String.builder().add("@baseUrl + \"").add(route.endpoint).add("\"")

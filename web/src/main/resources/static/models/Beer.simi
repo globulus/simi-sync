@@ -2,7 +2,7 @@ import "./SimiSyncModels.simi"
 import "./models/Brand.simi"
 
 !SimiSyncModels.Model(1)
-class Beer:
+class$ Beer:
     !SimiSyncModels.Field()
     guid = 0
 
@@ -15,10 +15,13 @@ class Beer:
     !SimiSyncModels.Field()
     quantity = 0
 
+    user = 0
+
     def init(user is String): pass
+    def init(guid is String, user is String): pass
 
     !SimiSyncModels.Method()
     def init(guid is String, date is Date, brand is String, quantity is Number): pass
 
-    def setUser(user is User): @user = user
+    def setUser(user is User): @user = user.guid
 end

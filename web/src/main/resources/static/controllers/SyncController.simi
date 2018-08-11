@@ -1,0 +1,18 @@
+import "./SimiSyncControllers.simi"
+import "./Stdlib/File.simi"
+
+class SyncController:
+    !SimiSyncControllers.Route("/sync/$version", "GET")
+    def sync(request):
+        version = request.path.version
+        response = $[]
+        response.clientTask = File.readString(\
+                File.listAll("static/controllers/clientTasks/" + version, "simi", false, request.resourceLoaderWrapper)\
+            .first().path)
+        for file in File.listAll("static/models/clientModels/" + version, "simi", true, request.resourceLoaderWrapper):
+            name = file.path.substring(file.path.lastIndexOf("/") + 1)
+            response.(name.substring(0, name.indexOf('.'))) = File.readString(file.path)
+        end
+        return ivic response
+    end
+end

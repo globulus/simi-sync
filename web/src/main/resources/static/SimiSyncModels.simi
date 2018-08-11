@@ -50,6 +50,10 @@ class_ SimiSyncModels:
                 dbClassNames.append(className)
                 classComposer = ClassComposer(className)
                 clientMappers = $[]
+                toLines = Object.array() # lines for function that maps server models to client
+                toLines.append("[f = def ():")
+                fromLines = Object.array() # lines for function that maps client models to server
+                fromLines.append("[f = def (client):")
                 for e in modelClass.enumerate():
                     key = e.key
                     value = modelClass.(key)
@@ -59,10 +63,19 @@ class_ SimiSyncModels:
                     end
                     else:
                         fieldAnnot = @extractAnnot(value, SimiSyncModels.Field)
-                        if not fieldAnnot or fieldAnnot.serverOnly or fieldAnnot.version > version: continue
+                        if not fieldAnnot or fieldAnnot.serverOnly or fieldAnnot.version > version:
+                            toLines.append("@" + key + " = nil")
+                            continue
+                        end
                         clientMapper = fieldAnnot.clientMapper
                         fieldName = fieldAnnot.clientName ?? key
                         classComposer.field(fieldName, ?clientMapper.type ?? value)
+                        if fieldName != key:
+                            toLines.append("@" + fieldName + " = @" + key)
+                            toLines.append("@" + key + " = nil")
+                            fromLines.append("@" + key + " = client." + fieldName)
+                        end
+                        else: fromLines.append("@" + key + " = client." + key)
                         if clientMapper:
                             clientMappers.(fieldName) = clientMapper
                         end
@@ -80,6 +93,15 @@ class_ SimiSyncModels:
                     if ex: print ex.message
                     writer.close()
                 end
+                toLines.append("return ivic self")
+                toLines.append("end].f")
+                fromLines.append("return self")
+                fromLines.append("end].f")
+#                print toLines
+#                print fromLines
+                originalClass = gu className
+                originalClass.("toClientModel") = gu String.from(toLines, "\n")
+                originalClass.("fromClientModel") = gu String.from(fromLines, "\n")
             end
             NotDb.setupSingleton(dbClassNames)
         end

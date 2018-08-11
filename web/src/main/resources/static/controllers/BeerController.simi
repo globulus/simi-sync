@@ -3,16 +3,48 @@ import "./db/NotDb.simi"
 import "./models/Beer.simi"
 
 class BeerController:
-
     !SimiSyncControllers.Route("/beers", "GET")
-    !SimiSyncControllers.ClientTask(1, nil, ["SimiCookie"], nil, nil)
+    !SimiSyncControllers.ClientTask(1, nil, ["simiCookie"], nil, nil)
     def get(request):
-        return BeerController.checkAuth(def user: ivic NotDb.singleton.query(Beer(user.guid)))(request)
+        impl = def user:
+            beers = NotDb.singleton.query(Beer(user.guid))
+            return ivic beers.map(def b: b.clone()).forEach(def b: b.toClientModel())
+        end
+        return BeerController.checkAuth(impl)(request)
+    end
+
+    !SimiSyncControllers.Route("/beers", "PUT")
+    !SimiSyncControllers.ClientTask(1, [Object], ["simiCookie"], nil, [201])
+    def put(request):
+        impl = def user:
+            beers = gu request.body
+            for beer in beers:
+                newBeer = Beer()
+                newBeer.fromClientModel(beer)
+                newBeer.setUser(user)
+                NotDb.singleton.insert(newBeer)
+            end
+            return [code = 201, body = ""]
+        end
+        return BeerController.checkAuth(impl)(request)
+    end
+
+    !SimiSyncControllers.Route("/beers/$guid", "DELETE")
+    !SimiSyncControllers.ClientTask(1, [String], ["simiCookie"], nil, nil)
+    def delete(request):
+        impl = def user:
+            beer = NotDb.singleton.query(Beer(request.path.guid, user.guid)).first()
+            if beer:
+                NotDb.singleton.delete(beer)
+                return ""
+            end
+            else: return [code = 400, body = "Unable to delete"]
+        end
+        return BeerController.checkAuth(impl)(request)
     end
 
     def checkAuth(f):
        wrapper = def request:
-            print "in wrapper"
            user = NotDb.singleton.findUser(request).first()
            print "got user " + user
            if user: return f(user)

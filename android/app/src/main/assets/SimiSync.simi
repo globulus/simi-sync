@@ -1,0 +1,15 @@
+import "stdlib/Net.simi"
+import "stdlib/File.simi"
+
+class_ SimiSync:
+    def configure(baseUrl, version):
+        @baseUrl = baseUrl
+        @version = version
+    end
+
+    def sync(success is Function, error is Function):
+        Net.get([url = @baseUrl + "/sync/" + @version, headers = []], def response:
+            print response
+        end)
+    end
+end

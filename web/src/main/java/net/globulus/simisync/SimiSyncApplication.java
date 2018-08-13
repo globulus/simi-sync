@@ -45,6 +45,11 @@ public class SimiSyncApplication {
 					return null;
 				}
 			}
+
+			@Override
+			public boolean useApiClassName(String nativeFileName) {
+				return true;
+			}
 		});
 		ActiveSimi.load("SimiSyncImports.simi");
 		ActiveSimi.eval("SimiSyncImports", "prepareImports",

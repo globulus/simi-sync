@@ -127,7 +127,7 @@ class_ SimiSyncControllers:
             params.append("error is Function")
             composer = FunctionComposer(name, params)
 
-            url = String.builder().add("@baseUrl + \"").add(route.endpoint).add("\"")
+            url = String.builder().add("SimiSync.baseUrl + \"").add(route.endpoint).add("\"")
             for path in pathComponents:
                 url.add(".replacing(\"$").add(path).add("\", ").add(path).add(")")
             end
@@ -147,7 +147,7 @@ class_ SimiSyncControllers:
 
             successCodes = clientTask.successCodes ?? [200]
             successCodesString = ivic successCodes
-            composer.line("Net." + route.verb.lowerCased() + "([url = url, json = body, headers = " + headersString + "], def response:")
+            composer.line("Net." + route.verb.lowerCased() + "([url = url, json = ivic body, headers = " + headersString + "], def response:")
             composer.line("   if response.code in " + successCodesString.substring(0, successCodesString.len() - 1) + ": success(response)")
             composer.line("   else: error(response)")
             composer.line("end)")

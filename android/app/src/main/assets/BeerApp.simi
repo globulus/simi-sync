@@ -1,0 +1,5 @@
+class_ BeerApp:
+    def login(un, pw, success, error):
+        ClientTasks.postLogin(User(un, pw), success, error)
+    end
+end

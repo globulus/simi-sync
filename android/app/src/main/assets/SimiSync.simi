@@ -7,9 +7,31 @@ class_ SimiSync:
         @version = version
     end
 
-    def sync(success is Function, error is Function):
+    def sync(outputDir is String, success is Function, error is Function):
         Net.get([url = @baseUrl + "/sync/" + @version, headers = []], def response:
-            print response
+            if response.code == 200:
+                print "success"
+                filesToEval = Object.array()
+                body = gu response.body
+#                print body
+                for e in body.enumerate():
+                    filesToEval.append(@_writeFile(outputDir, e.key, e.value))
+                end
+                success(filesToEval)
+            end
+            else: error(response)
         end)
+    end
+
+    def _writeFile(outputDir, name, code):
+        f = File(outputDir + "/simiSync/" + name + ".simi")
+        print "WRITING: " + f.path
+        writer = WriteStream(f)
+        writer.write(code)
+        rescue ex:
+            if ex: print ex.message
+            writer.close()
+        end
+        return f.path
     end
 end

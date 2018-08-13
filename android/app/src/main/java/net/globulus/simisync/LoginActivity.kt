@@ -40,7 +40,10 @@ class LoginActivity : AppCompatActivity() {
                 return false
             }
 
-            override fun readFile(path: String?): String {
+            override fun readFile(path: String): String {
+                if (path.startsWith(filesDir.absolutePath)) {
+                   return File(path).readText()
+                }
                 return application.assets.open(path).bufferedReader().use { it.readText() }
             }
 
@@ -99,15 +102,20 @@ class LoginActivity : AppCompatActivity() {
         ActiveSimi.load("SimiSync.simi")
         ActiveSimi.eval("SimiSync", "configure", SimiValue.String("http://10.0.2.2:8888"), SimiValue.Number(1.0))
         val callback = NetCallback({response ->
-            println(SimiMapper.fromObject(response).toString())
+            val filesToEval = SimiMapper.fromArray(response)
+            println(filesToEval.toString())
+            val strArray = filesToEval.map { it as String }.toTypedArray()
+            ActiveSimi.load(*strArray)
         }, {response ->
             println(SimiMapper.fromObject(response).toString())
         })
         try {
-            ActiveSimi.eval("SimiSync", "sync", callback.getSuccessCallable(), callback.getErrorCallable())
+            ActiveSimi.eval("SimiSync", "sync", SimiValue.String(filesDir.absolutePath),
+                    callback.getSuccessCallable(), callback.getErrorCallable())
         } catch (e: Exception) {
             e.printStackTrace()
         }
+        ActiveSimi.load("BeerApp.simi")
     }
 
     /**
@@ -153,13 +161,13 @@ class LoginActivity : AppCompatActivity() {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true)
-            val creds = SimiValue.Object(SimiMapper.toObject(mapOf("email" to SimiValue.String(emailStr), "password" to SimiValue.String(passwordStr)), true))
             val callback = NetCallback({response ->
                 println(SimiMapper.fromObject(response).toString())
             }, {response ->
                 println(SimiMapper.fromObject(response).toString())
             })
-            ActiveSimi.eval("ClientTasks", "postLogin", creds, callback.getSuccessCallable(), callback.getErrorCallable())
+            ActiveSimi.eval("BeerApp", "login", SimiValue.String(emailStr), SimiValue.String(passwordStr),
+                    callback.getSuccessCallable(), callback.getErrorCallable())
         }
     }
 

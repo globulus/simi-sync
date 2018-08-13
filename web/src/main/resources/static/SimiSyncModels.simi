@@ -54,10 +54,18 @@ class_ SimiSyncModels:
                 toLines.append("[f = def ():")
                 fromLines = Object.array() # lines for function that maps client models to server
                 fromLines.append("[f = def (client):")
+                methodsAdded = Object.array()
+                for e in modelClass.methods().enumerate():
+                    for method in e.value:
+                        if not @extractAnnot(method, SimiSyncModels.Method): continue
+                        methodsAdded.append(e.key)
+                        classComposer.method(method)
+                    end
+                end
                 for e in modelClass.enumerate():
                     key = e.key
                     value = modelClass.(key)
-                    if value is Function:
+                    if value is Function and key not in methodsAdded:
                         if not @extractAnnot(value, SimiSyncModels.Method): continue
                         classComposer.method(value)
                     end

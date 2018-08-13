@@ -20,4 +20,5 @@ class$ User:
     def init(guid is String, email is String, password is String): pass
 
     def updateCookie(): @cookie = guid()
+
 end

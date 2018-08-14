@@ -42,7 +42,7 @@ class NotDb:
     end
 
     def _queryIndividual(obj, collection):
-        if obj.guid: return collection.(obj.guid)
+        if obj.guid: return [collection.(obj.guid)]
         matches = Object.array()
         for other in collection.values():
             $match = true

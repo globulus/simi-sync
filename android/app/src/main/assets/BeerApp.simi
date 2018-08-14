@@ -1,5 +1,34 @@
 class_ BeerApp:
     def login(un, pw, success, error):
-        ClientTasks.postLogin(User(un, pw), success, error)
+        ClientTasks.postLogin(User(un, pw), def r:
+            cookie = r.body
+            ClientTasks.getBrands(def brands:
+                BeerApp.brands = gu brands.body
+                print "Bands are: " + @brands
+                success(cookie)
+            end, error)
+        end, error)
     end
+
+    def get(cookie, success, error):
+        ClientTasks.getBeers(cookie, def response:
+            print "GET response: " + response.body
+            success(gu response.body)
+        end, error)
+    end
+
+    def delete(guid, cookie, success, error):
+        print "Deleting: " + guid
+        ClientTasks.deleteBeers(guid, cookie, def response:
+            print "Deleted, getting..."
+            @get(cookie, success, error)
+        end, error)
+    end
+
+    def put(timestamp, brand, quantity, cookie, success, error):
+        beer = Beer(guid(), Date(timestamp), brand, quantity)
+        ClientTasks.putBeers([beer], cookie, success, error)
+    end
+
+    def brandForGuid(guid): return @brands.filter(def b: b.guid == guid).first().name
 end

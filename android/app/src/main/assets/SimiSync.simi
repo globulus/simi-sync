@@ -13,7 +13,7 @@ class_ SimiSync:
                 print "success"
                 filesToEval = Object.array()
                 body = gu response.body
-#                print body
+                print body
                 for e in body.enumerate():
                     filesToEval.append(@_writeFile(outputDir, e.key, e.value))
                 end

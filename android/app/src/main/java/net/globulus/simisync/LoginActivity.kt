@@ -3,6 +3,7 @@ package net.globulus.simisync
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.annotation.TargetApi
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -26,6 +27,12 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+//        val cookie = EasyPrefs.getCookie(this)
+//        if (cookie != null) {
+//            startListActivity()
+//        }
+
         // Set up the login form.
         password.setOnEditorActionListener(TextView.OnEditorActionListener { _, id, _ ->
             if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
@@ -102,12 +109,12 @@ class LoginActivity : AppCompatActivity() {
         ActiveSimi.load("SimiSync.simi")
         ActiveSimi.eval("SimiSync", "configure", SimiValue.String("http://10.0.2.2:8888"), SimiValue.Number(1.0))
         val callback = NetCallback({response ->
-            val filesToEval = SimiMapper.fromArray(response)
+            val filesToEval = SimiMapper.fromArray(response.`object`)
             println(filesToEval.toString())
             val strArray = filesToEval.map { it as String }.toTypedArray()
             ActiveSimi.load(*strArray)
         }, {response ->
-            println(SimiMapper.fromObject(response).toString())
+            println(SimiMapper.fromObject(response.`object`).toString())
         })
         try {
             ActiveSimi.eval("SimiSync", "sync", SimiValue.String(filesDir.absolutePath),
@@ -162,13 +169,21 @@ class LoginActivity : AppCompatActivity() {
             // perform the user login attempt.
             showProgress(true)
             val callback = NetCallback({response ->
-                println(SimiMapper.fromObject(response).toString())
+                val cookie = SimiMapper.fromSimiValue(response) as String
+                EasyPrefs.putCookie(this, cookie)
+                println("Got cookie: $cookie")
+                startListActivity()
             }, {response ->
-                println(SimiMapper.fromObject(response).toString())
+                println(SimiMapper.fromObject(response.`object`).toString())
             })
             ActiveSimi.eval("BeerApp", "login", SimiValue.String(emailStr), SimiValue.String(passwordStr),
                     callback.getSuccessCallable(), callback.getErrorCallable())
         }
+    }
+
+    private fun startListActivity() {
+        startActivity(Intent(this, ListActivity::class.java))
+        finish()
     }
 
     private fun isEmailValid(email: String): Boolean {

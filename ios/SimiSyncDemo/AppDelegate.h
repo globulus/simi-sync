@@ -7,13 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ActiveSimi.h"
-#import "IOSClass.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, SMActiveSimi_ImportResolver>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 
 @end
 

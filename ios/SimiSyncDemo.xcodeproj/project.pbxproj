@@ -13,10 +13,11 @@
 		6A5270E0212568600066F33B /* Stdlib.simi in Resources */ = {isa = PBXBuildFile; fileRef = 6A5270DF212568600066F33B /* Stdlib.simi */; };
 		6A5270E3212569BB0066F33B /* SimiSync.simi in Resources */ = {isa = PBXBuildFile; fileRef = 6A5270E1212569BB0066F33B /* SimiSync.simi */; };
 		6A5270E4212569BB0066F33B /* BeerApp.simi in Resources */ = {isa = PBXBuildFile; fileRef = 6A5270E2212569BB0066F33B /* BeerApp.simi */; };
-		6A5270E721256C6A0066F33B /* NetCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A5270E621256C6A0066F33B /* NetCallback.m */; };
 		6A5270F2212578750066F33B /* SimiFile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5270F12125786B0066F33B /* SimiFile.framework */; };
 		6A5270F3212578750066F33B /* SimiFile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5270F12125786B0066F33B /* SimiFile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6A5270F7212578990066F33B /* File.simi in Resources */ = {isa = PBXBuildFile; fileRef = 6A5270F6212578990066F33B /* File.simi */; };
+		6A981A6A2125BDE900ED3FF4 /* NetCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A981A662125BDE900ED3FF4 /* NetCallback.m */; };
+		6A981A6D2125BE1300ED3FF4 /* SimiSyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A981A6C2125BE1300ED3FF4 /* SimiSyncManager.m */; };
 		6AB172DC2124721600F32968 /* Net.simi in Resources */ = {isa = PBXBuildFile; fileRef = 6AB172DB2124721600F32968 /* Net.simi */; };
 		6AF83E06208A7A30005CA323 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF83E05208A7A30005CA323 /* AppDelegate.m */; };
 		6AF83E09208A7A30005CA323 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF83E08208A7A30005CA323 /* ViewController.m */; };
@@ -101,10 +102,12 @@
 		6A5270DF212568600066F33B /* Stdlib.simi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Stdlib.simi; path = ../../../../web/src/main/resources/static/stdlib/Stdlib.simi; sourceTree = "<group>"; };
 		6A5270E1212569BB0066F33B /* SimiSync.simi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = SimiSync.simi; path = ../../android/app/src/main/assets/SimiSync.simi; sourceTree = "<group>"; };
 		6A5270E2212569BB0066F33B /* BeerApp.simi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BeerApp.simi; path = ../../android/app/src/main/assets/BeerApp.simi; sourceTree = "<group>"; };
-		6A5270E521256C6A0066F33B /* NetCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetCallback.h; sourceTree = "<group>"; };
-		6A5270E621256C6A0066F33B /* NetCallback.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetCallback.m; sourceTree = "<group>"; };
 		6A5270EA2125786B0066F33B /* SimiFile.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SimiFile.xcodeproj; path = "../../simi-ios/SimiLib/SimiFile/SimiFile.xcodeproj"; sourceTree = "<group>"; };
 		6A5270F6212578990066F33B /* File.simi */ = {isa = PBXFileReference; lastKnownFileType = text; path = File.simi; sourceTree = "<group>"; };
+		6A981A662125BDE900ED3FF4 /* NetCallback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetCallback.m; sourceTree = "<group>"; };
+		6A981A672125BDE900ED3FF4 /* NetCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetCallback.h; sourceTree = "<group>"; };
+		6A981A6B2125BE1300ED3FF4 /* SimiSyncManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimiSyncManager.h; sourceTree = "<group>"; };
+		6A981A6C2125BE1300ED3FF4 /* SimiSyncManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimiSyncManager.m; sourceTree = "<group>"; };
 		6AB172DB2124721600F32968 /* Net.simi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Net.simi; sourceTree = "<group>"; };
 		6AF83E01208A7A30005CA323 /* SimiSyncDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimiSyncDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AF83E04208A7A30005CA323 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -171,6 +174,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		6A981A652125BDE900ED3FF4 /* SimiSyncSdk */ = {
+			isa = PBXGroup;
+			children = (
+				6A981A672125BDE900ED3FF4 /* NetCallback.h */,
+				6A981A662125BDE900ED3FF4 /* NetCallback.m */,
+				6A981A6B2125BE1300ED3FF4 /* SimiSyncManager.h */,
+				6A981A6C2125BE1300ED3FF4 /* SimiSyncManager.m */,
+			);
+			path = SimiSyncSdk;
+			sourceTree = "<group>";
+		};
 		6AF83DF8208A7A30005CA323 = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +209,7 @@
 		6AF83E03208A7A30005CA323 /* SimiSyncDemo */ = {
 			isa = PBXGroup;
 			children = (
+				6A981A652125BDE900ED3FF4 /* SimiSyncSdk */,
 				6A5270E2212569BB0066F33B /* BeerApp.simi */,
 				6A5270E1212569BB0066F33B /* SimiSync.simi */,
 				6A486B88208BDF60000398A6 /* stdlib */,
@@ -207,8 +222,6 @@
 				6AF83E0F208A7A31005CA323 /* LaunchScreen.storyboard */,
 				6AF83E12208A7A31005CA323 /* Info.plist */,
 				6AF83E13208A7A31005CA323 /* main.m */,
-				6A5270E521256C6A0066F33B /* NetCallback.h */,
-				6A5270E621256C6A0066F33B /* NetCallback.m */,
 			);
 			path = SimiSyncDemo;
 			sourceTree = "<group>";
@@ -370,10 +383,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A5270E721256C6A0066F33B /* NetCallback.m in Sources */,
 				6AF83E09208A7A30005CA323 /* ViewController.m in Sources */,
+				6A981A6D2125BE1300ED3FF4 /* SimiSyncManager.m in Sources */,
 				6AF83E14208A7A31005CA323 /* main.m in Sources */,
 				6AF83E06208A7A30005CA323 /* AppDelegate.m in Sources */,
+				6A981A6A2125BDE900ED3FF4 /* NetCallback.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

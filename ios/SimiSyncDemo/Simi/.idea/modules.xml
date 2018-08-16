@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/File-java/out/production/File-java/File-java.iml" filepath="$PROJECT_DIR$/File-java/out/production/File-java/File-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Native-java/out/production/Native-java/Native-java.iml" filepath="$PROJECT_DIR$/Native-java/out/production/Native-java/Native-java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Simi.iml" filepath="$PROJECT_DIR$/Simi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Stdlib-java/out/production/Stdlib-java/Stdlib-java.iml" filepath="$PROJECT_DIR$/Stdlib-java/out/production/Stdlib-java/Stdlib-java.iml" />
+    </modules>
+  </component>
+</project>

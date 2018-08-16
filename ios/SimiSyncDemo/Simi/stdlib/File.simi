@@ -1,0 +1,12 @@
+class WriteStream(Closeable):
+    def init(file): native
+    def write(string): native
+    def close(): native
+
+    def newLine(): @write("\n")
+end
+
+class File:
+    def init(path): pass
+    def readString(path): native
+end

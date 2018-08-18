@@ -12,9 +12,11 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_login.*
+import net.globulus.easyprefs.EasyPrefs
 import net.globulus.simi.ActiveSimi
 import net.globulus.simi.SimiMapper
 import net.globulus.simi.api.SimiValue
+import net.globulus.simisync.sdk.NetCallback
 import java.io.File
 import java.net.URL
 
@@ -108,12 +110,12 @@ class LoginActivity : AppCompatActivity() {
         })
         ActiveSimi.load("SimiSync.simi")
         ActiveSimi.eval("SimiSync", "configure", SimiValue.String("http://10.0.2.2:8888"), SimiValue.Number(1.0))
-        val callback = NetCallback({response ->
+        val callback = NetCallback({ response ->
             val filesToEval = SimiMapper.fromArray(response.`object`)
             println(filesToEval.toString())
             val strArray = filesToEval.map { it as String }.toTypedArray()
             ActiveSimi.load(*strArray)
-        }, {response ->
+        }, { response ->
             println(SimiMapper.fromObject(response.`object`).toString())
         })
         try {
@@ -168,12 +170,12 @@ class LoginActivity : AppCompatActivity() {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true)
-            val callback = NetCallback({response ->
+            val callback = NetCallback({ response ->
                 val cookie = SimiMapper.fromSimiValue(response) as String
                 EasyPrefs.putCookie(this, cookie)
                 println("Got cookie: $cookie")
                 startListActivity()
-            }, {response ->
+            }, { response ->
                 println(SimiMapper.fromObject(response.`object`).toString())
             })
             ActiveSimi.eval("BeerApp", "login", SimiValue.String(emailStr), SimiValue.String(passwordStr),
@@ -191,7 +193,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun isPasswordValid(password: String): Boolean {
-        return password.length > 4
+        return password.length >= 4
     }
 
     /**

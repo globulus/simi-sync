@@ -2,6 +2,7 @@ class_ BeerApp:
     def login(un, pw, success, error):
         ClientTasks.postLogin(User(un, pw), def r:
             cookie = r.body
+print "Got cookie " + cookie
             ClientTasks.getBrands(def brands:
                 BeerApp.brands = gu brands.body
                 print "Bands are: " + @brands
@@ -27,6 +28,8 @@ class_ BeerApp:
 
     def put(timestamp, brand, quantity, cookie, success, error):
         beer = Beer(guid(), Date(timestamp), brand, quantity)
+print beer
+print cookie
         ClientTasks.putBeers([beer], cookie, success, error)
     end
 

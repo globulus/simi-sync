@@ -9,9 +9,11 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_list.*
 import kotlinx.android.synthetic.main.content_list.*
+import net.globulus.easyprefs.EasyPrefs
 import net.globulus.simi.ActiveSimi
 import net.globulus.simi.SimiMapper
 import net.globulus.simi.api.SimiValue
+import net.globulus.simisync.sdk.NetCallback
 
 class ListActivity : AppCompatActivity(), BeerFragment.OnListFragmentInteractionListener {
 
@@ -29,10 +31,10 @@ class ListActivity : AppCompatActivity(), BeerFragment.OnListFragmentInteraction
         AlertDialog.Builder(this)
                 .setMessage(R.string.delete_entry)
                 .setPositiveButton(R.string.yes) { dialog, which ->
-                    val callback = NetCallback({response ->
+                    val callback = NetCallback({ response ->
                         val f = fragment as BeerFragment
                         f.update(Beer.fromList(response))
-                    }, {response ->
+                    }, { response ->
                         println(SimiMapper.fromSimiValue(response))
                     })
                     ActiveSimi.eval("BeerApp", "delete", SimiValue.String(item.guid),

@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
-
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
@@ -41,8 +41,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.4.0'
-    implementation 'com.github.globulus.easyparcel:easyparcel:2d128ed14d'
-    implementation 'com.github.globulus.easyprefs:easyprefs:15543b1a8c'
+    kapt 'com.github.globulus.easyparcel:easyparcel-processor:2d128ed14d'
+    kapt 'com.github.globulus.easyprefs:easyprefs-processor:15543b1a8c'
     annotationProcessor 'com.github.globulus.easyparcel:easyparcel-processor:2d128ed14d'
     annotationProcessor 'com.github.globulus.easyprefs:easyprefs-processor:15543b1a8c'
+    implementation 'com.github.globulus.easyparcel:easyparcel:2d128ed14d'
+    implementation 'com.github.globulus.easyprefs:easyprefs:15543b1a8c'
 }

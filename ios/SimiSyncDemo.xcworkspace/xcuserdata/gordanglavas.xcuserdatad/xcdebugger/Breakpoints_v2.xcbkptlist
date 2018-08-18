@@ -298,7 +298,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/SimiNet/SimiNet/SM_Net.m"
-            timestampString = "556125404.543803"
+            timestampString = "556283023.7514189"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "80"
@@ -426,7 +426,7 @@
                   moduleName = "SimiFile"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/gordanglavas/Desktop/github/simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/SimiValue.m"
-                  timestampString = "556125404.677108"
+                  timestampString = "556309396.603609"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "248"
@@ -441,7 +441,7 @@
                   moduleName = "SimiNet"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/gordanglavas/Desktop/github/simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/SimiValue.m"
-                  timestampString = "556125404.683957"
+                  timestampString = "556309396.60733"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "248"
@@ -618,12 +618,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SimiSyncDemo/AppDelegate.m"
-            timestampString = "556125226.68398"
+            timestampString = "556283023.751935"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "-application:didFinishLaunchingWithOptions:"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "-applicationWillTerminate:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -682,7 +682,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/SimiNet/SimiNet/SM_Net.m"
-            timestampString = "556125404.547248"
+            timestampString = "556283023.752041"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "86"
@@ -698,13 +698,77 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/SimiNet/SimiNet/SM_Net.m"
-            timestampString = "556125404.548738"
+            timestampString = "556283023.7522711"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "68"
             endingLineNumber = "68"
             landmarkName = "+performRequestWithVerb:sender:interpreter:request:callback:"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SimiSyncDemo/LoginViewController.swift"
+            timestampString = "556309396.433722"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "goTap(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SimiSyncDemo/AddViewController.swift"
+            timestampString = "556309396.433789"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "saveTap(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SimiSyncDemo.AddViewController.saveTap(Any) -&gt; ()"
+                  moduleName = "SimiSyncDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gordanglavas/Desktop/github/simi-sync/ios/SimiSyncDemo/AddViewController.swift"
+                  timestampString = "556282696.388312"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "384">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;__ObjC.SMSimiValue&gt;) -&gt; () in SimiSyncDemo.AddViewController.saveTap(Any) -&gt; ()"
+                  moduleName = "SimiSyncDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gordanglavas/Desktop/github/simi-sync/ios/SimiSyncDemo/AddViewController.swift"
+                  timestampString = "556282696.390576"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

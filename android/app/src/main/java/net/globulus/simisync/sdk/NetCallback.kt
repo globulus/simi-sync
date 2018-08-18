@@ -1,4 +1,4 @@
-package net.globulus.simisync
+package net.globulus.simisync.sdk
 
 import net.globulus.simi.api.BlockInterpreter
 import net.globulus.simi.api.SimiCallable

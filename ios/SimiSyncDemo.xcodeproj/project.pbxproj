@@ -16,11 +16,13 @@
 		6A5270F2212578750066F33B /* SimiFile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5270F12125786B0066F33B /* SimiFile.framework */; };
 		6A5270F3212578750066F33B /* SimiFile.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6A5270F12125786B0066F33B /* SimiFile.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6A5270F7212578990066F33B /* File.simi in Resources */ = {isa = PBXBuildFile; fileRef = 6A5270F6212578990066F33B /* File.simi */; };
+		6A869F59212826910098B94F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A869F58212826910098B94F /* LoginViewController.swift */; };
+		6A869F5B21282AD20098B94F /* BeerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A869F5A21282AD20098B94F /* BeerTableViewController.swift */; };
+		6A869F5D21282AE10098B94F /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A869F5C21282AE10098B94F /* AddViewController.swift */; };
 		6A981A6A2125BDE900ED3FF4 /* NetCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A981A662125BDE900ED3FF4 /* NetCallback.m */; };
 		6A981A6D2125BE1300ED3FF4 /* SimiSyncManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A981A6C2125BE1300ED3FF4 /* SimiSyncManager.m */; };
 		6AB172DC2124721600F32968 /* Net.simi in Resources */ = {isa = PBXBuildFile; fileRef = 6AB172DB2124721600F32968 /* Net.simi */; };
 		6AF83E06208A7A30005CA323 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF83E05208A7A30005CA323 /* AppDelegate.m */; };
-		6AF83E09208A7A30005CA323 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF83E08208A7A30005CA323 /* ViewController.m */; };
 		6AF83E0C208A7A30005CA323 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AF83E0A208A7A30005CA323 /* Main.storyboard */; };
 		6AF83E0E208A7A31005CA323 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AF83E0D208A7A31005CA323 /* Assets.xcassets */; };
 		6AF83E11208A7A31005CA323 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AF83E0F208A7A31005CA323 /* LaunchScreen.storyboard */; };
@@ -78,6 +80,27 @@
 			remoteGlobalIDString = 6A59D6E120E7DBD7008FB2AB;
 			remoteInfo = SimiFile;
 		};
+		6A869F4E212825020098B94F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A5270C6212567320066F33B /* iOSSimi.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6ACE44212126E8D400113E98;
+			remoteInfo = "iOSSimi Mac";
+		};
+		6A869F51212825020098B94F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A5270EA2125786B0066F33B /* SimiFile.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6ACE44312126EB4700113E98;
+			remoteInfo = "SimiFile Mac";
+		};
+		6A869F54212825020098B94F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6A5270CD212567390066F33B /* SimiNet.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6ACE44152126E80200113E98;
+			remoteInfo = "SimiNet Mac";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -104,6 +127,10 @@
 		6A5270E2212569BB0066F33B /* BeerApp.simi */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = BeerApp.simi; path = ../../android/app/src/main/assets/BeerApp.simi; sourceTree = "<group>"; };
 		6A5270EA2125786B0066F33B /* SimiFile.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SimiFile.xcodeproj; path = "../../simi-ios/SimiLib/SimiFile/SimiFile.xcodeproj"; sourceTree = "<group>"; };
 		6A5270F6212578990066F33B /* File.simi */ = {isa = PBXFileReference; lastKnownFileType = text; path = File.simi; sourceTree = "<group>"; };
+		6A869F57212826900098B94F /* SimiSyncDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SimiSyncDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		6A869F58212826910098B94F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		6A869F5A21282AD20098B94F /* BeerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerTableViewController.swift; sourceTree = "<group>"; };
+		6A869F5C21282AE10098B94F /* AddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewController.swift; sourceTree = "<group>"; };
 		6A981A662125BDE900ED3FF4 /* NetCallback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetCallback.m; sourceTree = "<group>"; };
 		6A981A672125BDE900ED3FF4 /* NetCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetCallback.h; sourceTree = "<group>"; };
 		6A981A6B2125BE1300ED3FF4 /* SimiSyncManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimiSyncManager.h; sourceTree = "<group>"; };
@@ -112,8 +139,6 @@
 		6AF83E01208A7A30005CA323 /* SimiSyncDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimiSyncDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AF83E04208A7A30005CA323 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6AF83E05208A7A30005CA323 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		6AF83E07208A7A30005CA323 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6AF83E08208A7A30005CA323 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6AF83E0B208A7A30005CA323 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6AF83E0D208A7A31005CA323 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6AF83E10208A7A31005CA323 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -154,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				6A5270CC212567330066F33B /* libiOSSimi.a */,
+				6A869F4F212825020098B94F /* libiOSSimi Mac.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				6A5270D2212567390066F33B /* SimiNet.framework */,
+				6A869F55212825020098B94F /* SimiNet.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -170,6 +197,7 @@
 			isa = PBXGroup;
 			children = (
 				6A5270F12125786B0066F33B /* SimiFile.framework */,
+				6A869F52212825020098B94F /* SimiFile.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -215,13 +243,15 @@
 				6A486B88208BDF60000398A6 /* stdlib */,
 				6AF83E04208A7A30005CA323 /* AppDelegate.h */,
 				6AF83E05208A7A30005CA323 /* AppDelegate.m */,
-				6AF83E07208A7A30005CA323 /* ViewController.h */,
-				6AF83E08208A7A30005CA323 /* ViewController.m */,
 				6AF83E0A208A7A30005CA323 /* Main.storyboard */,
 				6AF83E0D208A7A31005CA323 /* Assets.xcassets */,
 				6AF83E0F208A7A31005CA323 /* LaunchScreen.storyboard */,
 				6AF83E12208A7A31005CA323 /* Info.plist */,
 				6AF83E13208A7A31005CA323 /* main.m */,
+				6A869F57212826900098B94F /* SimiSyncDemo-Bridging-Header.h */,
+				6A869F58212826910098B94F /* LoginViewController.swift */,
+				6A869F5A21282AD20098B94F /* BeerTableViewController.swift */,
+				6A869F5C21282AE10098B94F /* AddViewController.swift */,
 			);
 			path = SimiSyncDemo;
 			sourceTree = "<group>";
@@ -280,6 +310,7 @@
 				TargetAttributes = {
 					6AF83E00208A7A30005CA323 = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 0940;
 					};
 				};
 			};
@@ -337,6 +368,27 @@
 			remoteRef = 6A5270F02125786B0066F33B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		6A869F4F212825020098B94F /* libiOSSimi Mac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libiOSSimi Mac.a";
+			remoteRef = 6A869F4E212825020098B94F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6A869F52212825020098B94F /* SimiFile.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SimiFile.framework;
+			remoteRef = 6A869F51212825020098B94F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6A869F55212825020098B94F /* SimiNet.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SimiNet.framework;
+			remoteRef = 6A869F54212825020098B94F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -383,11 +435,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AF83E09208A7A30005CA323 /* ViewController.m in Sources */,
 				6A981A6D2125BE1300ED3FF4 /* SimiSyncManager.m in Sources */,
 				6AF83E14208A7A31005CA323 /* main.m in Sources */,
+				6A869F5D21282AE10098B94F /* AddViewController.swift in Sources */,
 				6AF83E06208A7A30005CA323 /* AppDelegate.m in Sources */,
+				6A869F59212826910098B94F /* LoginViewController.swift in Sources */,
 				6A981A6A2125BDE900ED3FF4 /* NetCallback.m in Sources */,
+				6A869F5B21282AD20098B94F /* BeerTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,6 +595,7 @@
 			baseConfigurationReference = EC835EE295D65B4E51036A1B /* Pods-SimiCalc.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N43KYHR3HM;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -573,6 +628,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.globulus.SimiCalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SimiSyncDemo/SimiSyncDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = (
 					"${J2OBJC_HOME}/include",
@@ -587,6 +645,7 @@
 			baseConfigurationReference = 8C4CFA0DC5E3706D640DFE65 /* Pods-SimiCalc.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N43KYHR3HM;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -619,6 +678,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.globulus.SimiCalc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SimiSyncDemo/SimiSyncDemo-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = (
 					"${J2OBJC_HOME}/include",

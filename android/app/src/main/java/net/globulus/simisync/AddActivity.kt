@@ -10,9 +10,11 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import kotlinx.android.synthetic.main.activity_add.*
 import kotlinx.android.synthetic.main.content_add.*
+import net.globulus.easyprefs.EasyPrefs
 import net.globulus.simi.ActiveSimi
 import net.globulus.simi.SimiMapper
 import net.globulus.simi.api.SimiValue
+import net.globulus.simisync.sdk.NetCallback
 import java.util.*
 
 class AddActivity : AppCompatActivity() {
@@ -48,10 +50,10 @@ class AddActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.add) {
-            val callback = NetCallback({response ->
+            val callback = NetCallback({ response ->
                 setResult(Activity.RESULT_OK)
                 finish()
-            }, {response ->
+            }, { response ->
                 finish()
             })
             ActiveSimi.eval("BeerApp", "put",

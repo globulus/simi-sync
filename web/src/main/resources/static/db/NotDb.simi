@@ -37,7 +37,7 @@ class NotDb:
     def find(className, guid): return @_db.(className).(guid)
 
     def findUser(request):
-        cookie = request.headers.simicookie
+        cookie = request.headers.simiCookie ?? request.headers.simicookie
         return ife(cookie, :@_queryIndividual([cookie = cookie], @_db.("User")), nil)
     end
 

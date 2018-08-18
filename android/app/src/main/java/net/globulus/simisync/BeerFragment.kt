@@ -10,9 +10,11 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import net.globulus.easyprefs.EasyPrefs
 import net.globulus.simi.ActiveSimi
 import net.globulus.simi.SimiMapper
 import net.globulus.simi.api.SimiValue
+import net.globulus.simisync.sdk.NetCallback
 
 /**
  * A fragment representing a list of Items.
@@ -65,9 +67,9 @@ class BeerFragment : Fragment() {
     }
 
     internal fun fetchData() {
-        val callback = NetCallback({response ->
+        val callback = NetCallback({ response ->
             update(Beer.fromList(response))
-        }, {response ->
+        }, { response ->
             println(SimiMapper.fromSimiValue(response))
         })
         ActiveSimi.eval("BeerApp", "get", SimiValue.String(EasyPrefs.getCookie(context)),

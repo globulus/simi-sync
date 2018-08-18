@@ -25,14 +25,6 @@
     
     [[SimiSyncManager sharedInstance] bootWithBaseUrl:@"http://localhost:8888" version:1 callback:[[NetCallback alloc] initWithSuccess:^(SMSimiValue *ignored) {
         [SMActiveSimi load__WithNSStringArray:[IOSObjectArray arrayWithNSArray:@[@"BeerApp.simi"] type:[IOSClass classForIosName:@"NSString"]]];
-        NetCallback *loginCallback = [[NetCallback alloc] initWithSuccess:^(SMSimiValue *response) {
-            NSLog(@"Success");
-        } error:^(SMSimiValue *response) {
-            NSLog(@"Login error");
-        }];
-        [SMActiveSimi evalWithNSString:@"BeerApp"
-                          withNSString:@"login"
-               withSMSimiPropertyArray:[IOSObjectArray arrayWithNSArray:@[[SMSimiMapper toSimiPropertyWithId:@"a@a.com"], [SMSimiMapper toSimiPropertyWithId:@"passs"], loginCallback.success, loginCallback.error] type:SMSimiProperty_class_()]];
     } error:^(SMSimiValue *response) {
         NSLog(@"Error booting SimiSyncManager");
     }]];

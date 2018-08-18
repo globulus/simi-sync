@@ -46,6 +46,7 @@ class BeerController:
 
     def checkAuth(f):
        wrapper = def request:
+        print request
            user = NotDb.singleton.findUser(request).first()
            print "got user " + user
            if user: return f(user)

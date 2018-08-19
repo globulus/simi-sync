@@ -109,7 +109,7 @@ class LoginActivity : AppCompatActivity() {
 //            }
         })
         ActiveSimi.load("SimiSync.simi")
-        ActiveSimi.eval("SimiSync", "configure", SimiValue.String("http://10.0.2.2:8888"), SimiValue.Number(1.0))
+        ActiveSimi.eval("SimiSync", "configure", SimiValue.String("http://10.0.2.2:8888"), SimiValue.Number(1L))
         val callback = NetCallback({ response ->
             val filesToEval = SimiMapper.fromArray(response.`object`)
             println(filesToEval.toString())

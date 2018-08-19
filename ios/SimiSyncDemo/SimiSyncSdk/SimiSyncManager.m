@@ -11,6 +11,7 @@
 #import "IOSClass.h"
 #import "SimiMapper.h"
 #import "java/lang/Double.h"
+#import "java/lang/Long.h"
 #import "java/util/List.h"
 
 @implementation SimiSyncManager
@@ -47,7 +48,7 @@
     [SMActiveSimi load__WithNSStringArray:[IOSObjectArray arrayWithNSArray:@[@"SimiSync.simi"] type:[IOSClass classForIosName:@"NSString"]]];
     [SMActiveSimi evalWithNSString:@"SimiSync"
                       withNSString:@"configure"
-           withSMSimiPropertyArray:[IOSObjectArray arrayWithNSArray:@[[SMSimiMapper toSimiPropertyWithId:baseUrl], [SMSimiMapper toSimiPropertyWithId:[[JavaLangDouble alloc] initWithDouble:version]]] type:SMSimiProperty_class_()]];
+           withSMSimiPropertyArray:[IOSObjectArray arrayWithNSArray:@[[SMSimiMapper toSimiPropertyWithId:baseUrl], [SMSimiMapper toSimiPropertyWithId:[[JavaLangLong alloc] initWithLong:version]]] type:SMSimiProperty_class_()]];
     NetCallback *syncCallback = [[NetCallback alloc] initWithSuccess:^(SMSimiValue *response) {
         id<JavaUtilList> list = [SMSimiMapper fromArrayWithSMSimiObject:response.getObject];
         [SMActiveSimi load__WithNSStringArray:[list toArray]];

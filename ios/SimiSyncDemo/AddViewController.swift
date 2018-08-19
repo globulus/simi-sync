@@ -52,9 +52,9 @@ class AddViewController: UIViewController {
             print(response)
         }!
         SMActiveSimi.eval(with: "BeerApp", with: "put", withSMSimiPropertyArray: IOSObjectArray(nsArray: [
-            SMSimiValue_Number(double: self.date.date.timeIntervalSince1970),
+            SMSimiValue_Number(long: Int64(self.date.date.timeIntervalSince1970 * 1000)),
             SMSimiValue_String(nsString: self.brandGuid),
-            SMSimiValue_Number(double: Double(self.quantity.text!)!),
+            SMSimiValue_Number(long: Int64(self.quantity.text!)!),
             SMSimiValue_String(nsString: UserDefaults.standard.string(forKey: "cookie")),
             callback.success,
             callback.error

@@ -57,9 +57,9 @@ class AddActivity : AppCompatActivity() {
                 finish()
             })
             ActiveSimi.eval("BeerApp", "put",
-                    SimiValue.Number((date.tag as Date).time.toDouble()),
+                    SimiValue.Number((date.tag as Date).time),
                     SimiValue.String(brands!![brand.selectedItemPosition]["guid"] as String),
-                    SimiValue.Number(quantity.text.toString().toDouble()),
+                    SimiValue.Number(quantity.text.toString().toLong()),
                     SimiValue.String(EasyPrefs.getCookie(this)),
                     callback.getSuccessCallable(),
                     callback.getErrorCallable())

@@ -12,6 +12,7 @@
 #import "SimiMapper.h"
 #import "ActiveSimi.h"
 #import "IOSClass.h"
+#import "ConversionUtil.h"
 
 @interface AppDelegate ()
 
@@ -26,7 +27,8 @@
     [[SimiSyncManager sharedInstance] bootWithBaseUrl:@"http://localhost:8888" version:1 callback:[[NetCallback alloc] initWithSuccess:^(SMSimiValue *ignored) {
         [SMActiveSimi load__WithNSStringArray:[IOSObjectArray arrayWithNSArray:@[@"BeerApp.simi"] type:[IOSClass classForIosName:@"NSString"]]];
     } error:^(SMSimiValue *response) {
-        NSLog(@"Error booting SimiSyncManager");
+        NSDictionary *dict = [ConversionUtil dictionaryFromMap:[SMSimiMapper fromObjectWithSMSimiObject:[response getObject]]];
+        NSLog(@"Error booting SimiSyncManager: %@", dict);
     }]];
     
     return YES;

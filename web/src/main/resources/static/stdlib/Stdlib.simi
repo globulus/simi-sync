@@ -252,6 +252,10 @@ class$ String:
     def isEmpty(): return @len() == 0
 end
 
+class TypeMismatchException(Exception):
+    def init(var, type): super.init("Expected: " + type + " but got " + var.("class"))
+end
+
 Math = [
     pow = def (a, b): native,
     max = def (a, b): native,
@@ -303,7 +307,7 @@ class Enum:
 
         timestamp = clock().toString()
         joined = obj.reduce("", String.sum)
-        className = "EnumClass" + joined + timestamp.substring(timestamp.indexOf('.') + 1)
+        className = "EnumClass" + joined + timestamp
 
         isArray = obj.isArray()
         isFirstValueScalar = obj.0 is not Object

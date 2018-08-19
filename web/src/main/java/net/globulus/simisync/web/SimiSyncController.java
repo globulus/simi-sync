@@ -53,7 +53,7 @@ public class SimiSyncController {
             return ResponseEntity.ok(value.getString());
         } else {
             SimiObject obj = value.getObject();
-            int statusCode = (int) obj.get("code", null).getValue().getNumber().doubleValue();
+            int statusCode = (int) obj.get("code", null).getValue().getNumber().asLong();
             String responseBody = obj.get("body", null).getValue().getString();
             return ResponseEntity.status(statusCode).body(responseBody);
         }

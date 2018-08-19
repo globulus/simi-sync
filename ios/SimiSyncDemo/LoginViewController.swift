@@ -41,9 +41,7 @@ class LoginViewController: UIViewController {
         let loginCallback = NetCallback(success: { (response) in
             let cookie = response?.getString()
             UserDefaults.standard.set(cookie, forKey: "cookie")
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "segLogin2Beers", sender: self)
-            }
+            self.performSegue(withIdentifier: "segLogin2Beers", sender: self)
         }) { (response) in
             print("Login error")
         }!

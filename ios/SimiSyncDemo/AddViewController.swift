@@ -45,9 +45,7 @@ class AddViewController: UIViewController {
     
     @IBAction func saveTap(_ sender: Any) {
         let callback = NetCallback(success: { (response) in
-            DispatchQueue.main.async {
-                self.navigationController?.popViewController(animated: true)
-            }
+            self.navigationController?.popViewController(animated: true)
         }) { (response) in
             print(response)
         }!

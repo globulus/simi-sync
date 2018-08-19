@@ -52,7 +52,7 @@ class BeerTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "BeerCell", for: indexPath)
         let map = self.items[indexPath.row]
-        cell.textLabel?.text = "\(brand(forGuid: map.getWithId("brand") as! String)) x \(map.getWithId("quantity") as! Double)"
+        cell.textLabel?.text = "\(brand(forGuid: map.getWithId("brand") as! String)) x \(Int64(map.getWithId("quantity") as! Double))"
         let timestamp = (map.getWithId("date") as! JavaUtilMap).getWithId("timestamp") as! Int64
         cell.detailTextLabel?.text = self.dateFormatter.string(from: Date(timeIntervalSince1970: Double(timestamp) / 1000))
         return cell
@@ -72,9 +72,7 @@ class BeerTableViewController: UITableViewController {
             ac.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (action) in
                 let callback = NetCallback(success: { (response) in
                     self.items.remove(at: indexPath.row)
-                    DispatchQueue.main.async {
-                        self.tableView.deleteRows(at: [indexPath], with: .right)
-                    }
+                    self.tableView.deleteRows(at: [indexPath], with: .right)
                 }, error: { (response) in
                     print(response)
                 })!

@@ -13,6 +13,6 @@ class SyncController:
             name = file.path.substring(file.path.lastIndexOf("/") + 1)
             response.(name.substring(0, name.indexOf('.'))) = File.readString(file.path)
         end
-        return ivic response
+        return response
     end
 end

@@ -1,4 +1,5 @@
 import "./Stdlib/File.simi"
+import "./Stdlib/Gson.simi"
 import "./Stdlib/CodeBlocks.simi"
 import "./SimiSyncCommons.simi"
 import CodeBlocks
@@ -67,9 +68,20 @@ class_ SimiSyncControllers:
             print "Routing: " + route
             match = @_matchRoute(route)
             print "Found route: " + match
-            simiBody = ife(body, :(gu body), nil)
-            if match is Function: return match(SimiSyncControllers.Request(@resourceLoaderWrapper, headers, simiBody, queryObj))
-            return match.func(SimiSyncControllers.Request(@resourceLoaderWrapper, headers, simiBody, queryObj, match.path))
+            simiBody = ife(body, :@_deserializeBody(body, headers), nil)
+            func = ife(match is Function, :match, :match.func)
+            path = ife(match is Function, nil, :match.path)
+            return @_serializeResponse(func(SimiSyncControllers.Request(@resourceLoaderWrapper, headers, simiBody, queryObj, path)), headers)
+        end
+
+        def _parseQuery(query):
+            if not query: return []
+            queryObj = $[]
+            for comp in query.split('&'):
+                index = comp.indexOf('=')
+                queryObj.(comp.substring(0, index)) = comp.substring(index + 1)
+            end
+            return queryObj
         end
 
         def _matchRoute(route):
@@ -99,14 +111,28 @@ class_ SimiSyncControllers:
             return nil
         end
 
-        def _parseQuery(query):
-            if not query: return []
-            queryObj = $[]
-            for comp in query.split('&'):
-                index = comp.indexOf('=')
-                queryObj.(comp.substring(0, index)) = comp.substring(index + 1)
+        def _deserializeBody(body, headers):
+            if @_isJson(headers): return Gson.parse(body)
+            return gu body
+        end
+
+        def _serializeResponse(response, headers):
+            if response is String: return response
+            hasCode = response.len() == 2 and "code" in response and "body" in response
+            if @_isJson(headers):
+                if hasCode: return [code = response.code, \
+                                    body = ife(response.body is String, :response.body, :Gson.stringify(response.body))]
+                return Gson.stringify(response)
             end
-            return queryObj
+            if hasCode: return response
+            return ivic response
+        end
+
+        def _isJson(headers):
+            contentType = headers.("content-type") ?? headers.("Content-Type")
+            if contentType == "application/json": return true
+            accept = headers.("accept") ?? headers.("Accept")
+            return accept == "application/json"
         end
 
         def _getClientTask(route, clientTask):

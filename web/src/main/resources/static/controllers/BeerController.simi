@@ -9,7 +9,7 @@ class BeerController:
         impl = def user:
             beers = NotDb.singleton.query(Beer(user.guid))
             print "Found beers: " + ivic beers
-            return ivic beers.map(def b: b.clone()).forEach(def b: b.toClientModel())
+            return beers.map(def b: b.clone()).forEach(def b: b.toClientModel())
         end
         return BeerController.checkAuth(impl)(request)
     end
@@ -18,7 +18,6 @@ class BeerController:
     !SimiSyncControllers.ClientTask(1, [Object], ["simiCookie"], nil, [201])
     def put(request):
         impl = def user:
-            print request
             for beer in request.body:
                 newBeer = Beer()
                 newBeer.fromClientModel(beer)

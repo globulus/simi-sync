@@ -9,13 +9,13 @@ Features:
 * Automatically consume the models and API on the client side without having to write any code at all!
 
 Checkout out readmes in subprojects for more details:
-* [Web](https://www.github.com/globulus/simi-sync/web) - sample code for a Šimi backend that implements ŠimiSync.
-* [Android](https://www.github.com/globulus/simi-sync/android) - sample Android app that uses a ŠimiSync backend.
-* [iOS](https://www.github.com/globulus/simi-sync/ios) - sample iOS app that uses a ŠimiSync backend.
+* [Web](https://www.github.com/globulus/simi-sync/tree/master/web) - sample code for a Šimi backend that implements ŠimiSync.
+* [Android](https://www.github.com/globulus/simi-sync/tree/master/android) - sample Android app that uses a ŠimiSync backend.
+* [iOS](https://www.github.com/globulus/simi-sync/tree/master/ios) - sample iOS app that uses a ŠimiSync backend.
 
 ### How-to
 
-1. Create a [Šimi backend](https://www.github.com/globulus/simi-sync/web).
+1. Create a [Šimi backend](https://www.github.com/globulus/simi-sync/tree/master/web).
 2. Use *SimiSyncModels.Model* annotation and its children to specify client-side models and differentiate them from server ones.
 3. Use *SimiSyncControllers.ClientTask* annotation to specify endpoints that should be a part of client-side API.
 4. Setup your client app to use Šimi, and invoke the *SimiSyncManager#boot* method, specify the URL of your backend, as well as the model/API version you'd like to use.

@@ -11,9 +11,9 @@ data class Beer(val guid: String, val date: Long, val brand: String, val quantit
             val list = SimiMapper.fromArray(prop.`object`)
             for (item in list) {
                 val map = item as Map<String, Any>
-                beers.add(Beer(map["guid"] as String, ((map["date"] as Map<*, *>)["timestamp"] as SimiValue.Number).asLong(),
+                beers.add(Beer(map["guid"] as String, ((map["date"] as Map<*, *>)["timestamp"] as Long),
                         ActiveSimi.eval("BeerApp", "brandForGuid", SimiValue.String(map["brand"] as String)).value.string,
-                                (map["quantity"] as SimiValue.Number).asLong().toInt()))
+                                (map["quantity"] as Long).toInt()))
             }
             return beers
         }

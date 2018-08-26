@@ -56,8 +56,8 @@ class$ Object:
         end
         return true
     end
-    def filter(predicate):
-        buffer = $[]
+    def where(predicate):
+        buffer = Object.array()
         for item in self:
             if predicate(item): buffer.append(item)
         end
@@ -88,7 +88,7 @@ class$ Object:
         return clone
     end
     def map(function):
-        buffer = $[]
+        buffer = Object.array()
         for item in self: buffer.append(function(item))
         if @isArray(): return buffer
         else: return buffer.zip()
@@ -138,6 +138,9 @@ end
 class NumberFormatException(Exception):
 end
 
+class NilReferenceException(Exception):
+end
+
 def ife(condition, ifval, elseval):
     if condition: return ifval()
     else: return elseval()
@@ -148,7 +151,6 @@ class Iterator:
 end
 
 class RangeIterator(Iterator):
-
     def init(range):
         @range = range
         @current = @range.start
@@ -165,7 +167,6 @@ class RangeIterator(Iterator):
 end
 
 class Range:
-
     def init(start, stop):
         @start = start
         @stop = stop
@@ -205,6 +206,14 @@ class$ Number:
 
     def sum(a, b): return a + b
     def product(a, b): return a * b
+
+    def bitAnd(num): native
+    def bitOr(num): native
+    def bitXor(num): native
+    def bitInv(): native
+    def bitShl(num): native
+    def bitShr(num): native
+    def bitUshr(num): native
 end
 
 class$ String:
@@ -250,6 +259,10 @@ class$ String:
     def removing(start): return @slice(start, @len())
     def substring(start): return @substring(start, @len())
     def isEmpty(): return @len() == 0
+end
+
+class TypeMismatchException(Exception):
+    def init(var, type): super.init("Expected: \(type) but got " + var.("class"))
 end
 
 Math = [
@@ -303,7 +316,7 @@ class Enum:
 
         timestamp = clock().toString()
         joined = obj.reduce("", String.sum)
-        className = "EnumClass" + joined + timestamp.substring(timestamp.indexOf('.') + 1)
+        className = "EnumClass" + joined + timestamp
 
         isArray = obj.isArray()
         isFirstValueScalar = obj.0 is not Object

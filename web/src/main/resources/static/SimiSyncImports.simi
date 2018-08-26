@@ -13,7 +13,7 @@ class_ SimiSyncImports:
                     $dirPath = file.path.substring(0, lastIndex)
                     $dirPath = $dirPath.substring(0, $dirPath.lastIndexOf('/') + 1)
                 end
-                imports.append("import \"./" + folder + "/" + name + "\"")
+                imports.append("import \"./\(folder)/\(name)\"")
             end
         end
         f = File($dirPath + "PreparedImports.simi")

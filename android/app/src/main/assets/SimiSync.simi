@@ -10,8 +10,6 @@ class_ SimiSync:
     def sync(outputDir is String, success is Function, error is Function):
         Net.get([url = @baseUrl + "/sync/" + @version, headers = []], def response:
             print response
-print response.code
-print response.code == 200
             if response.code == 200:
                 print "success"
                 filesToEval = Object.array()

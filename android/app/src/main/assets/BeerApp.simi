@@ -2,10 +2,10 @@ class_ BeerApp:
     def login(un, pw, success, error):
         ClientTasks.postLogin(User(un, pw), def r:
             cookie = r.body
-print "Got cookie " + cookie
+            print "Got cookie \(cookie)"
             ClientTasks.getBrands(def brands:
                 BeerApp.brands = gu brands.body
-                print "Bands are: " + @brands
+                print "Brands are: \(@brands)"
                 success(cookie)
             end, error)
         end, error)
@@ -14,6 +14,8 @@ print "Got cookie " + cookie
     def get(cookie, success, error):
         ClientTasks.getBeers(cookie, def response:
             print "GET response: " + response.body
+            l = gu response.body
+            print l
             success(gu response.body)
         end, error)
     end
@@ -33,5 +35,5 @@ print cookie
         ClientTasks.putBeers([beer], cookie, success, error)
     end
 
-    def brandForGuid(guid): return @brands.filter(def b: b.guid == guid).first().name
+    def brandForGuid(guid): return @brands.where(def b: b.guid == guid).first().name
 end

@@ -32,12 +32,12 @@ class_ SimiSyncControllers:
             clientTasks = ClassComposer("ClientTasks", "$")
             for file in File.listAll("static/controllers", "simi", true, resourceLoaderWrapper):
                 if not $dirPath:
-                    $dirPath = file.path.substring(0, file.path.lastIndexOf('/') + 1) + "clientTasks/" + version + "/"
+                    $dirPath = file.path.substring(0, file.path.lastIndexOf('/') + 1) + "clientTasks/\(version)/"
                 end
                 # Read and interpret the content of the file
                 controllerCode = File.readString(file.path)
                 controllerClass = gu @removeImports(controllerCode)
-                for e in controllerClass.enumerate().filter(def e: e.value is Function):
+                for e in controllerClass.enumerate().where(def e: e.value is Function):
                     if e.key.startsWith('_'): continue
                     value = controllerClass.(e.key)
                     route = @extractAnnot(value, SimiSyncControllers.Route)
@@ -51,6 +51,7 @@ class_ SimiSyncControllers:
                 end
             end
             @router = router
+            print router
 
             clientTasksCode = clientTasks.getString()
             f = File($dirPath + clientTasks.name + ".simi")
@@ -145,10 +146,10 @@ class_ SimiSyncControllers:
             if not pathComponents.isEmpty(): params.addAll(pathComponents)
             if clientTask.query: params.addAll(clientTask.query)
             if route.verb in ["POST", "PUT"]: params.append("body")
-            for i in ?clientTask.payloadVerification.len().times():
+            for i in clientTask.payloadVerification.len().times():
                 params.(i) = params.(i) + " is " + ClassCode(clientTask.payloadVerification.(i)).name
             end
-            if clientTask.headers: params.addAll(clientTask.headers.map(def h: h + " is String"))
+            if clientTask.headers: params.addAll(clientTask.headers.map(def h: "\(h) is String"))
             params.append("success is Function")
             params.append("error is Function")
             composer = FunctionComposer(name, params)
@@ -173,15 +174,15 @@ class_ SimiSyncControllers:
 
             successCodes = clientTask.successCodes ?? [200]
             successCodesString = ivic successCodes
-            composer.line("Net." + route.verb.lowerCased() + "([url = url, json = ivic body, headers = " + headersString + "], def response:")
-            composer.line("   if response.code in " + successCodesString.substring(0, successCodesString.len() - 1) + ": success(response)")
+            composer.line("Net.\(route.verb.lowerCased())([url = url, json = ivic body, headers = \(headersString)], def response:")
+            composer.line("   if response.code in \(successCodesString.substring(0, successCodesString.len() - 1)): success(response)")
             composer.line("   else: error(response)")
             composer.line("end)")
             return composer.getString()
         end
 
         def _extractPathComponents(route): return route.endpoint.split('/')\
-            .filter(def p: p.startsWith('$'))\
+            .where(def p: p.startsWith('$'))\
             .map(def p: p.substring(1))
     end
 end

@@ -45,15 +45,15 @@ class NotDb:
         if obj.guid: return [collection.(obj.guid)]
         matches = Object.array()
         for other in collection.values():
-            $match = true
+            match = true
             for e in obj.enumerate():
                 [key, value] = e
                 if value != other.(key):
-                    $match = false
+                    match $= false
                     break
                 end
             end
-            if $match: matches.append(other)
+            if match: matches.append(other)
         end
         return matches
     end

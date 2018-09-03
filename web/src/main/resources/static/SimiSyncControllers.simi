@@ -28,15 +28,21 @@ class_ SimiSyncControllers:
             @resourceLoaderWrapper = resourceLoaderWrapper
             # By convention, all controller files should live in a directory named "controller" and its subdirectories
             router = $[]
-            $dirPath = nil
+            dirPath = nil
             clientTasks = ClassComposer("ClientTasks", "$")
             for file in File.listAll("static/controllers", "simi", true, resourceLoaderWrapper):
-                if not $dirPath:
-                    $dirPath = file.path.substring(0, file.path.lastIndexOf('/') + 1) + "clientTasks/\(version)/"
+                if not dirPath:
+                    dirPath $= file.path.substring(0, file.path.lastIndexOf('/') + 1) + "clientTasks/\(version)/"
                 end
                 # Read and interpret the content of the file
                 controllerCode = File.readString(file.path)
                 controllerClass = gu @removeImports(controllerCode)
+                print controllerCode
+                print "AAAA"
+                print @removeImports(controllerCode)
+                print "BBBB"
+                print controllerClass
+                print "CCCCC"
                 for e in controllerClass.enumerate().where(def e: e.value is Function):
                     if e.key.startsWith('_'): continue
                     value = controllerClass.(e.key)
@@ -54,7 +60,7 @@ class_ SimiSyncControllers:
             print router
 
             clientTasksCode = clientTasks.getString()
-            f = File($dirPath + clientTasks.name + ".simi")
+            f = File(dirPath + clientTasks.name + ".simi")
             writer = WriteStream(f)
             writer.write(clientTasksCode)
             rescue ex:
@@ -95,7 +101,7 @@ class_ SimiSyncControllers:
                 if endpointSplit.len() != pathSplit.len(): continue
 
                 # Check for matches amongst paths with components
-                $matches = true
+                matches = true
                 pathObj = $[]
                 for ee in endpointSplit.enumerate():
                     [i, component] = ee
@@ -103,11 +109,11 @@ class_ SimiSyncControllers:
                     pathObj.clear()
                     if component.startsWith('$'): pathObj.(component.substring(1)) = pathComponent # Remove starting $
                     elsif component != pathComponent:
-                        $matches = false
+                        matches $= false
                         break
                     end
                 end
-                if $matches: return [func = func, path = pathObj]
+                if matches: return [func = func, path = pathObj]
             end
             return nil
         end

@@ -34,11 +34,11 @@ class_ SimiSyncModels:
         def parse(version, resourceLoaderWrapper):
             import CodeBlocks
             # By convention, all model files should live in a directory named "models" and its subdirectories
-            $dirPath = nil
+            dirPath = nil
             dbClassNames = Object.array()
             for file in File.listAll("static/models", "simi", true, resourceLoaderWrapper):
-                if not $dirPath:
-                    $dirPath = file.path.substring(0, file.path.lastIndexOf('/') + 1) +  "clientModels/\(version)/"
+                if not dirPath:
+                    dirPath $= file.path.substring(0, file.path.lastIndexOf('/') + 1) +  "clientModels/\(version)/"
                 end
                 # Read and interpret the content of the file
                 modelCode = File.readString(file.path)
@@ -94,7 +94,7 @@ class_ SimiSyncModels:
                     classComposer.add("def mapField(name): return " + clientMappersCode.substring(0, clientMappersCode.len() - 1) + ".(name)")
                 end
                 clientCode = classComposer.getString()
-                f = File($dirPath + className + ".simi")
+                f = File(dirPath + className + ".simi")
                 writer = WriteStream(f)
                 writer.write(clientCode)
                 rescue ex:

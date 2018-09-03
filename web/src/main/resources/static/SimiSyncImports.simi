@@ -3,20 +3,20 @@ import "./Stdlib/File.simi"
 class_ SimiSyncImports:
     def prepareImports(resourceLoaderWrapper):
         imports = Object.array()
-        $dirPath = nil
+        dirPath = nil
         for folder in ["models", "controllers"]:
             for file in File.listAll("static/" + folder, "simi", true, resourceLoaderWrapper):
                 lastIndex = file.path.lastIndexOf('/')
                 name = file.path.substring(lastIndex + 1)
                 if name == "ClientTasks.simi": continue
-                if not $dirPath:
-                    $dirPath = file.path.substring(0, lastIndex)
-                    $dirPath = $dirPath.substring(0, $dirPath.lastIndexOf('/') + 1)
+                if not dirPath:
+                    dirPath $= file.path.substring(0, lastIndex)
+                    dirPath $= dirPath.substring(0, dirPath.lastIndexOf('/') + 1)
                 end
                 imports.append("import \"./\(folder)/\(name)\"")
             end
         end
-        f = File($dirPath + "PreparedImports.simi")
+        f = File(dirPath + "PreparedImports.simi")
         writer = WriteStream(f)
         writer.write(String.from(imports, "\n") + "\n")
         rescue ex:

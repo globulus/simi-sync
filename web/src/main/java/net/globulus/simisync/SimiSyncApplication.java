@@ -22,6 +22,7 @@ public class SimiSyncApplication {
 
 	public static void main(String[] args) {
 		ResourceLoaderWrapper resourceLoaderWrapper = new ResourceLoaderWrapper(resourceLoader);
+		ActiveSimi.setDebugMode(true);
 		ActiveSimi.setImportResolver(new ActiveSimi.ImportResolver() {
 			@Override
 			public String readFile(String s) {

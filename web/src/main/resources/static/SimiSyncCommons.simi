@@ -3,8 +3,7 @@ class_ SimiSyncCommons:
         def removeImports(code):
             lines = code.split("\n")
             start = 0
-            for e in lines.enumerate():
-                [i, line] = e
+            for [i, line] in lines.enumerate():
                 if not line.isEmpty() and not line.startsWith("import"):
                     start $= i
                     break

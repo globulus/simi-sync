@@ -37,12 +37,6 @@ class_ SimiSyncControllers:
                 # Read and interpret the content of the file
                 controllerCode = File.readString(file.path)
                 controllerClass = gu @removeImports(controllerCode)
-                print controllerCode
-                print "AAAA"
-                print @removeImports(controllerCode)
-                print "BBBB"
-                print controllerClass
-                print "CCCCC"
                 for e in controllerClass.enumerate().where(def e: e.value is Function):
                     if e.key.startsWith('_'): continue
                     value = controllerClass.(e.key)
@@ -92,8 +86,7 @@ class_ SimiSyncControllers:
         end
 
         def _matchRoute(route):
-            for e in @router.(route.verb).enumerate():
-                [endpoint, func] = e
+            for [endpoint, func] in @router.(route.verb).enumerate():
                 path = route.endpoint
                 if endpoint == path: return func
                 endpointSplit = endpoint.split('/')
@@ -102,9 +95,8 @@ class_ SimiSyncControllers:
 
                 # Check for matches amongst paths with components
                 matches = true
-                pathObj = $[]
-                for ee in endpointSplit.enumerate():
-                    [i, component] = ee
+                pathObj = $[] # BP
+                for [i, component] in endpointSplit.enumerate():
                     pathComponent = pathSplit.(i)
                     pathObj.clear()
                     if component.startsWith('$'): pathObj.(component.substring(1)) = pathComponent # Remove starting $

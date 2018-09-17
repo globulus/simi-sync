@@ -62,8 +62,7 @@ class_ SimiSyncModels:
                         classComposer.method(method)
                     end
                 end
-                for e in modelClass.enumerate():
-                    key = e.key
+                for key in modelClass:
                     value = modelClass.(key)
                     if value is Function and key not in methodsAdded:
                         if not @extractAnnot(value, SimiSyncModels.Method): continue

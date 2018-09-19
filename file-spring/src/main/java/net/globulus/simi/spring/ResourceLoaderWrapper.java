@@ -48,4 +48,14 @@ public class ResourceLoaderWrapper implements SimiObject {
     public String toCode(int i, boolean b) {
         return null;
     }
+
+    @Override
+    public int getLineNumber() {
+        return 0;
+    }
+
+    @Override
+    public boolean hasBreakPoint() {
+        return false;
+    }
 }

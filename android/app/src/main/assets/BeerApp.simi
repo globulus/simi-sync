@@ -30,8 +30,6 @@ class_ BeerApp:
 
     def put(timestamp, brand, quantity, cookie, success, error):
         beer = Beer(guid(), Date(timestamp), brand, quantity)
-print beer
-print cookie
         ClientTasks.putBeers([beer], cookie, success, error)
     end
 

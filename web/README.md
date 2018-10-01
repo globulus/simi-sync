@@ -30,24 +30,24 @@ A sample controller class containing a single route method can be found below:
 
 ```ruby
 import "./SimiSyncControllers.simi"
-import "./db/NotDb.simi"
+import "./db/DbHelper.simi"
 import "./models/User.simi"
 
 class LoginController:
     !SimiSyncControllers.Route("/login", "POST")
-    def login(request):
-        credentials = request.body
-        user = NotDb.singleton.query(User(credentials.email)).first()
-        if user:
-            if user.password == credentials.password: return user.cookie
-            else: return [code = 401, body = "Invalid password"]
-        end
-        else:
-            signup = User(guid(), credentials.email, credentials.password)
-            signup.updateCookie()
-            NotDb.singleton.insert(signup)
-            return [code = 201, body = signup.cookie]
-        end
+   def login(request):
+           credentials = request.body
+           user = DbHelper.orm().query(User).where("email = '\(credentials.email)'").first()
+           if user:
+               if user.password == credentials.password: return user.cookie
+               else: return [code = 401, body = "Invalid password"]
+           end
+           else:
+               signup = User(guid(), credentials.email, credentials.password)
+               signup.updateCookie()
+               DbHelper.orm().createOrUpdate(signup)
+               return [code = 201, body = signup.cookie]
+           end
     end
 end
 

@@ -1,7 +1,7 @@
 import "./Stdlib/CodeBlocks.simi"
 import CodeBlocks
 
-class NotDb:
+class Cache:
     def init(classNames):
         @_db = $[]
         for className in classNames:
@@ -10,10 +10,10 @@ class NotDb:
     end
 
     def setupSingleton(classNames):
-        @singleton = NotDb(classNames)
-        @singleton.insert(Brand(guid(), "Osjecko", 0.5))
-        @singleton.insert(Brand(guid(), "Karlovacko", 0.5))
-        @singleton.insert(Brand(guid(), "Ozujsko", 0.33))
+        @singleton = Cache(classNames)
+#        @singleton.insert(Brand(guid(), "Osjecko", 0.5))
+#        @singleton.insert(Brand(guid(), "Karlovacko", 0.5))
+#        @singleton.insert(Brand(guid(), "Ozujsko", 0.33))
     end
 
     def insert(obj): @_collection(obj).(obj.guid) = obj
@@ -46,8 +46,7 @@ class NotDb:
         matches = Object.array()
         for other in collection.values():
             match = true
-            for e in obj.enumerate():
-                [key, value] = e
+            for [key, value] in obj.enumerate():
                 if value != other.(key):
                     match $= false
                     break

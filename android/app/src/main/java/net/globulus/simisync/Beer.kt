@@ -13,7 +13,7 @@ data class Beer(val guid: String, val date: Long, val brand: String, val quantit
                 val map = item as Map<String, Any>
                 beers.add(Beer(map["guid"] as String, ((map["date"] as Map<*, *>)["timestamp"] as Long),
                         ActiveSimi.eval("BeerApp", "brandForGuid", SimiValue.String(map["brand"] as String)).value.string,
-                                (map["quantity"] as Long).toInt()))
+                                (map["quantity"] as Double).toInt()))
             }
             return beers
         }

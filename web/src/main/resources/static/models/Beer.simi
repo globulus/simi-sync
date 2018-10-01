@@ -2,23 +2,29 @@ import "./SimiSyncModels.simi"
 import "./models/Brand.simi"
 
 !SimiSyncModels.Model(1)
+!Orm.Table()
 class$ Beer:
     !SimiSyncModels.Field()
-    guid = 0
+    !Orm.Column()
+    !Orm.PrimaryKey()
+    guid = ""
 
     !SimiSyncModels.Field()
-    date = 0
+    !Orm.Column()
+    date = Date()
 
     !SimiSyncModels.Field(false, 1, Brand.Mapper())
-    brand = 0
+    !Orm.Column()
+    brand = ""
 
     !SimiSyncModels.Field()
-    quantity = 0
+    !Orm.Column()
+    quantity = 0.0
 
-    user = 0
+    !Orm.Column()
+    user = ""
 
-    def init(user is String): pass
-    def init(guid is String, user is String): pass
+    def init(guid, date, brand, quantity, user): pass
 
     !SimiSyncModels.Method()
     def init(guid is String, date is Date, brand is String, quantity is Number): pass

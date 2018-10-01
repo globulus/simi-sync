@@ -1,7 +1,6 @@
 import "./Stdlib/File.simi"
 import "./Stdlib/CodeBlocks.simi"
 import "./SimiSyncCommons.simi"
-import "./db/NotDb.simi"
 
 class_ SimiSyncModels:
 
@@ -35,7 +34,6 @@ class_ SimiSyncModels:
             import CodeBlocks
             # By convention, all model files should live in a directory named "models" and its subdirectories
             dirPath = nil
-            dbClassNames = Object.array()
             for file in File.listAll("static/models", "simi", true, resourceLoaderWrapper):
                 if not dirPath:
                     dirPath $= file.path.substring(0, file.path.lastIndexOf('/') + 1) +  "clientModels/\(version)/"
@@ -47,7 +45,6 @@ class_ SimiSyncModels:
                 modelClassAnnot = @extractAnnot(modelClass, SimiSyncModels.Model)
                 if not modelClassAnnot : continue
                 className = ClassCode(modelClass).name
-                dbClassNames.append(className)
                 classComposer = ClassComposer(className)
                 clientMappers = $[]
                 toLines = Object.array() # lines for function that maps server models to client
@@ -110,7 +107,6 @@ class_ SimiSyncModels:
                 originalClass.("toClientModel") = gu String.from(toLines, "\n")
                 originalClass.("fromClientModel") = gu String.from(fromLines, "\n")
             end
-            NotDb.setupSingleton(dbClassNames)
         end
     end
 end

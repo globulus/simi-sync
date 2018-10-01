@@ -1,23 +1,30 @@
 import "./SimiSyncModels.simi"
+import "./stdlib/sql/Orm.simi"
 
 !SimiSyncModels.Model(1)
+!Orm.Table()
 class$ User:
     !SimiSyncModels.Field()
-    guid = 0
+    !Orm.Column()
+    !Orm.PrimaryKey()
+    guid = ""
 
     !SimiSyncModels.Field()
-    email = 0
+    !Orm.Column()
+    email = ""
 
     !SimiSyncModels.Field(true, 1)
-    password = 0
+    !Orm.Column()
+    password = ""
 
     !SimiSyncModels.Field(true, 1)
-    cookie = 0
+    !Orm.Column()
+    cookie = ""
 
+    def init(guid, email, password): pass
+    def init(guid, email, password, cookie): pass
     !SimiSyncModels.Method()
     def init(email is String, password is String): pass
-    def init(email is String): pass
-    def init(guid is String, email is String, password is String): pass
 
     def updateCookie(): @cookie = guid()
 

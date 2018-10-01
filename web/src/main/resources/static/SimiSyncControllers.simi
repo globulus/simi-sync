@@ -95,7 +95,7 @@ class_ SimiSyncControllers:
 
                 # Check for matches amongst paths with components
                 matches = true
-                pathObj = $[] # BP
+                pathObj = $[]
                 for [i, component] in endpointSplit.enumerate():
                     pathComponent = pathSplit.(i)
                     pathObj.clear()

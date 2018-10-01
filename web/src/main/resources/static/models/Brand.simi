@@ -1,20 +1,26 @@
 import "./SimiSyncModels.simi"
+import "./stdlib/sql/Orm.simi"
 
 !SimiSyncModels.Model(1)
+!Orm.Table()
 class$ Brand:
     !SimiSyncModels.Field()
-    guid = 0
+    !Orm.Column()
+    !Orm.PrimaryKey()
+    guid = ""
 
     !SimiSyncModels.Field()
-    name = 0
+    !Orm.Column()
+    name = ""
 
     !SimiSyncModels.Field()
-    size = 0
+    !Orm.Column()
+    size = 0.0
 
     !SimiSyncModels.Method()
     def init(guid is String, name is String, size is Number): pass
 
     class_ Mapper(SimiSyncModels.ClientMapper):
-        def init(): @init("0", def b: return b.guid, def s: return NotDb.singleton.find("Brand", s))
+        def init(): @init("0", def b: return b.guid, def s: return Cache.singleton.find("Brand", s))
     end
 end

@@ -1,0 +1,22 @@
+import "./stdlib/sql/Mariadb.simi"
+
+class DbHelper:
+    def orm():
+        if not @_orm:
+            @_orm = Orm(MariaDb(), "localhost", 3306, "test", "root", "")
+            for clazz in [User, Brand, Beer]: @_orm.createTable(clazz)
+            brands = @_orm.query(Brand).array()
+            if brands.isEmpty():
+                @_orm.createOrUpdate(Brand(guid(), "Osjecko", 0.5))
+                @_orm.createOrUpdate(Brand(guid(), "Karlovacko", 0.5))
+                @_orm.createOrUpdate(Brand(guid(), "Ozujsko", 0.33))
+            end
+        end
+        return @_orm
+    end
+
+    def findUser(request):
+        cookie = request.headers.simiCookie ?? request.headers.simicookie
+        return ife(cookie, :@orm().query(User).where("cookie = '\(cookie)'").first(), nil)
+    end
+end

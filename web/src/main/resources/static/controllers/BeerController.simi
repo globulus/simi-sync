@@ -1,5 +1,5 @@
 import "./SimiSyncControllers.simi"
-import "./db/NotDb.simi"
+import "./db/DbHelper.simi"
 import "./models/Beer.simi"
 
 class BeerController:
@@ -7,7 +7,7 @@ class BeerController:
     !SimiSyncControllers.ClientTask(1, nil, ["simiCookie"], nil, nil)
     def get(request):
         impl = def user:
-            beers = NotDb.singleton.query(Beer(user.guid))
+            beers = DbHelper.orm().query(Beer).where("user = '\(user.guid)'").array()
             print "Found beers: " + ivic beers
             return beers.map(def b: b.clone()).forEach(def b: b.toClientModel())
         end
@@ -22,7 +22,7 @@ class BeerController:
                 newBeer = Beer()
                 newBeer.fromClientModel(beer)
                 newBeer.setUser(user)
-                NotDb.singleton.insert(newBeer)
+                DbHelper.orm().createOrUpdate(newBeer)
             end
             return [code = 201, body = ""]
         end
@@ -33,9 +33,9 @@ class BeerController:
     !SimiSyncControllers.ClientTask(1, [String], ["simiCookie"], nil, nil)
     def delete(request):
         impl = def user:
-            beer = NotDb.singleton.query(Beer(request.path.guid, user.guid)).first()
+            beer = DbHelper.orm().query(Beer(request.path.guid, user.guid)).first()
             if beer:
-                NotDb.singleton.delete(beer)
+                DbHelper.orm().delete(beer)
                 return ""
             end
             else: return [code = 400, body = "Unable to delete"]
@@ -46,7 +46,7 @@ class BeerController:
     def checkAuth(f):
        wrapper = def request:
         print request
-           user = NotDb.singleton.findUser(request).first()
+           user = DbHelper.findUser(request)
            print "got user " + user
            if user: return f(user)
            return [code = 401, body = "Unauthorized"]

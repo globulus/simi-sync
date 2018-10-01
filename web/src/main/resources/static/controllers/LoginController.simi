@@ -1,5 +1,5 @@
 import "./SimiSyncControllers.simi"
-import "./db/NotDb.simi"
+import "./db/DbHelper.simi"
 import "./models/User.simi"
 
 class LoginController:
@@ -8,7 +8,7 @@ class LoginController:
     def login(request):
         credentials = request.body
         print "creds " + credentials
-        user = NotDb.singleton.query(User(credentials.email)).first()
+        user = DbHelper.orm().query(User).where("email = '\(credentials.email)'").first()
         print "found user: " + user
         if user:
             if user.password == credentials.password: return user.cookie
@@ -18,7 +18,7 @@ class LoginController:
             signup = User(guid(), credentials.email, credentials.password)
             signup.updateCookie()
             print "Signup " + signup
-            NotDb.singleton.insert(signup)
+            DbHelper.orm().createOrUpdate(signup)
             return [code = 201, body = signup.cookie]
         end
     end

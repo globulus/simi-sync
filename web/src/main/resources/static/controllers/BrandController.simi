@@ -1,9 +1,9 @@
 import "./SimiSyncControllers.simi"
-import "./db/NotDb.simi"
+import "./db/DbHelper.simi"
 import "./models/Brand.simi"
 
 class BrandController:
     !SimiSyncControllers.Route("/brands", "GET")
     !SimiSyncControllers.ClientTask(1)
-    def getBrands(request): return NotDb.singleton.queryAll(Brand).map(def b: b.clone()).forEach(def b: b.toClientModel())
+    def getBrands(request): return DbHelper.orm().query(Brand).array().map(def b: b.clone()).forEach(def b: b.toClientModel()) # BP
 end

@@ -1,6 +1,7 @@
 import "./Stdlib/File.simi"
 import "./Stdlib/Gson.simi"
 import "./Stdlib/CodeBlocks.simi"
+import "./Stdlib/Smt.simi"
 import "./SimiSyncCommons.simi"
 import CodeBlocks
 
@@ -14,11 +15,16 @@ class_ SimiSyncControllers:
         def init(resourceLoaderWrapper, headers, body): @init(resourceLoaderWrapper, headers, body, nil, nil)
         def init(resourceLoaderWrapper, headers, body, query): @init(resourceLoaderWrapper, headers, body, query, nil)
         def init(resourceLoaderWrapper, headers, body, query, path): pass
+        def setSmt(v): pass
     end
 
     class_ ClientTask:
         def init(version): pass
         def init(version, payloadVerification, headers, query, successCodes): pass
+    end
+
+    class_ Render:
+        def init(template): pass
     end
 
     class_ Router:
@@ -28,11 +34,14 @@ class_ SimiSyncControllers:
             @resourceLoaderWrapper = resourceLoaderWrapper
             # By convention, all controller files should live in a directory named "controller" and its subdirectories
             router = $[]
+            renderer = $[]
             dirPath = nil
             clientTasks = ClassComposer("ClientTasks", "$")
-            for file in File.listAll("static/controllers", "simi", true, resourceLoaderWrapper):
+            controllersPath = "controllers"
+            for file in File.listAll("static/\(controllersPath)", "simi", true, resourceLoaderWrapper):
                 if not dirPath:
-                    dirPath $= file.path.substring(0, file.path.lastIndexOf('/') + 1) + "clientTasks/\(version)/"
+                    dirPath $= file.path.substring(0, file.path.lastIndexOf('/') + 1)
+                    dirPath $= dirPath.substring(0, dirPath.len() - controllersPath.len() - 1)
                 end
                 # Read and interpret the content of the file
                 controllerCode = File.readString(file.path)
@@ -43,18 +52,32 @@ class_ SimiSyncControllers:
                     route = @extractAnnot(value, SimiSyncControllers.Route)
                     if not route: continue
                     verb = route.verb
-                    if verb not in router: router.(verb) = $[]
-                    router.(verb).(route.endpoint) = value
 
                     clientTask = @extractAnnot(value, SimiSyncControllers.ClientTask)
                     if clientTask: clientTasks.add(@_getClientTask(route, clientTask))
+
+                    render = @extractAnnot(value, SimiSyncControllers.Render)
+                    if render:
+                        templatePath = render.template ?? "\(dirPath)views/\(@_extractFileNameRoot(file))View.html.smt"
+                        smt = Smt.compile(File.readString(templatePath))
+                        if verb not in renderer: renderer.(verb) = $[]
+                        renderer.(verb).(route.endpoint) = smt
+                        composer = FunctionComposer.fromFunc(value, true)
+                        composer.line("return request.smt.run$()")
+                        guStr = "(\(composer.getString()))"
+                        value $= gu guStr # B
+                    end
+
+                    if verb not in router: router.(verb) = $[]
+                    router.(verb).(route.endpoint) = value
                 end
             end
             @router = router
-            print router
+            @renderer = renderer
+#            print router
 
             clientTasksCode = clientTasks.getString()
-            f = File(dirPath + clientTasks.name + ".simi")
+            f = File("\(dirPath)\(controllersPath)/clientTasks/\(version)/\(clientTasks.name).simi")
             writer = WriteStream(f)
             writer.write(clientTasksCode)
             rescue ex:
@@ -70,9 +93,10 @@ class_ SimiSyncControllers:
             match = @_matchRoute(route)
             print "Found route: " + match
             simiBody = ife(body, :@_deserializeBody(body, headers), nil)
-            func = ife(match is Function, :match, :match.func)
-            path = ife(match is Function, nil, :match.path)
-            return @_serializeResponse(func(SimiSyncControllers.Request(@resourceLoaderWrapper, headers, simiBody, queryObj, path)), headers)
+            req = SimiSyncControllers.Request(@resourceLoaderWrapper, headers, simiBody, queryObj, match.path)
+            req.setSmt(match.smt)
+            response = match.func(req) # B
+            return @_serializeResponse(response, headers)
         end
 
         def _parseQuery(query):
@@ -88,7 +112,8 @@ class_ SimiSyncControllers:
         def _matchRoute(route):
             for [endpoint, func] in @router.(route.verb).enumerate():
                 path = route.endpoint
-                if endpoint == path: return func
+                smt = @renderer.(route.verb).(endpoint)
+                if endpoint == path: return [func = func, smt = smt]
                 endpointSplit = endpoint.split('/')
                 pathSplit = path.split('/')
                 if endpointSplit.len() != pathSplit.len(): continue
@@ -105,7 +130,7 @@ class_ SimiSyncControllers:
                         break
                     end
                 end
-                if matches: return [func = func, path = pathObj]
+                if matches: return [func = func, path = pathObj, smt = smt]
             end
             return nil
         end
@@ -182,5 +207,11 @@ class_ SimiSyncControllers:
         def _extractPathComponents(route): return route.endpoint.split('/')\
             .where(def p: p.startsWith('$'))\
             .map(def p: p.substring(1))
+
+        def _extractFileNameRoot(file):
+            name = file.fileNameWithoutExtension()
+            ctrl = "Controller"
+            return ife(name.endsWith(ctrl), :name.substring(0, name.len() - ctrl.len()), name)
+        end
     end
 end

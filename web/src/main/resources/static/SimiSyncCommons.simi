@@ -9,7 +9,7 @@ class_ SimiSyncCommons:
                     break
                 end
             end
-            return String.from(lines.slice(start, lines.len() + 1), "\n")
+            return String.from(lines.slice(start), "\n")
         end
 
         def extractAnnot(field, annotClass): return (!!field).where(def a: a is annotClass).first()

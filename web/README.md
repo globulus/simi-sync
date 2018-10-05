@@ -50,7 +50,49 @@ class LoginController:
            end
     end
 end
+```
 
+#### Rendering
+
+Šimi controllers can return any text using [SMT](https://github.com/globulus/simi#smt). Most of the time, this is used for server-side rendering of Web pages.
+
+A controller that may render a web page should be annotated with the **SimiSyncControllers.Render**. It may or may not receive a path to the template file. If no template file is specified, the system will look for one in the **views** folder (e.g, if you controller is named HtmlController, its corresponding view is HtmlView.html.smt). The template will be compiled during server boot.
+
+Once a rendering controller is invoked, should it reach the end of its code without returning, it will invoke its SMT's *run* function, and return its response.
+
+As an example, consider the following controller that prints out its request's headers as an HTML table. It has a controller code:
+```ruby
+import "./SimiSyncControllers.simi"
+
+class HtmlController:
+    !SimiSyncControllers.Route("/headers", "GET")
+    !SimiSyncControllers.Render()
+    def renderHeaders(request): pass
+end
+```
+and an HTML SMT view file:
+```html
+ <html>
+    <body>
+        <h3>Incoming headers (without cookie):</h3>
+        <table>
+            <tr>
+                <th>Key</th>
+                <th>Value</th>
+            </tr>
+            %%for [key, value] in request.headers.enumerate():
+                %%if key != "cookie":
+                    <tr>
+                        <td><%=key%></td>
+                        <td><%=value%></td>
+                    </tr>
+                %%end
+            %%end
+        </table>
+
+        <h5>Cookie is: <%=request.headers.cookie%></h5>
+    <body>
+</html>
 ```
 
 ### Šimi Sync

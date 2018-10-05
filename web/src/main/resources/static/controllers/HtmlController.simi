@@ -1,7 +1,7 @@
 import "./SimiSyncControllers.simi"
 
 class HtmlController:
-    !SimiSyncControllers.Route("/html", "GET")
+    !SimiSyncControllers.Route("/headers", "GET")
     !SimiSyncControllers.Render()
-    def render(request): pass
+    def renderHeaders(request): pass
 end

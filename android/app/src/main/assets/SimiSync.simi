@@ -12,7 +12,7 @@ class_ SimiSync:
             print response
             if response.code == 200:
                 print "success"
-                filesToEval = Object.array()
+                filesToEval = $[]
                 body = gu response.body
                 print body
                 for e in body.enumerate():

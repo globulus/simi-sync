@@ -52,7 +52,7 @@
     NetCallback *syncCallback = [[NetCallback alloc] initWithSuccess:^(SMSimiValue *response) {
         id<JavaUtilList> list = [SMSimiMapper fromArrayWithSMSimiObject:response.getObject];
         [SMActiveSimi load__WithNSStringArray:[list toArray]];
-        [[callback.success getCallable] callWithSMBlockInterpreter:nil withJavaUtilList:nil withBoolean:true];
+        [[callback.success getCallable] callWithSMBlockInterpreter:nil withSMSimiEnvironment:nil withJavaUtilList:nil withBoolean:true];
     } error:^(SMSimiValue *response) {
         NSLog(@"Error");
     }];

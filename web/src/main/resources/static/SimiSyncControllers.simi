@@ -164,7 +164,7 @@ class_ SimiSyncControllers:
             slashIndex = rawEndpoint.indexOf('/') ?? rawEndpoint.len()
             endpoint = rawEndpoint.0.upperCased() + rawEndpoint.substring(1, slashIndex)
             name = route.verb.lowerCased() + endpoint
-            params = Object.array()
+            params = $[]
             pathComponents = @_extractPathComponents(route)
             if not pathComponents.isEmpty(): params.addAll(pathComponents)
             if clientTask.query: params.addAll(clientTask.query)
@@ -189,7 +189,7 @@ class_ SimiSyncControllers:
                 url.add("\"")
             end
             composer.line("url = " + url.build())
-            headers = Object.array()
+            headers = $[]
             for header in clientTask.headers:
                 headers.append(header + "=" + header)
             end

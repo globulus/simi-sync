@@ -9,7 +9,7 @@ class Smt:
 
     def compile(template):
         smt = Smt()
-        parts = Object.array()
+        parts = $[]
         lines = template.split("\n")
         skip = 0
         for [i, line] in lines.enumerate():
@@ -77,7 +77,7 @@ class Smt:
 
     def _parseLine(line, idx):
         i = 0
-        arr = Object.array()
+        arr = $[]
         while true:
             j = line.indexOf(@_EXPR_START, i)
             if j:

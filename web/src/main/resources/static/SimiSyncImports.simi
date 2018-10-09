@@ -2,7 +2,7 @@ import "./Stdlib/File.simi"
 
 class_ SimiSyncImports:
     def prepareImports(resourceLoaderWrapper):
-        imports = Object.array()
+        imports = $[]
         dirPath = nil
         for folder in ["models", "controllers"]:
             for file in File.listAll("static/" + folder, "simi", true, resourceLoaderWrapper):

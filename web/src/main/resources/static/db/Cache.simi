@@ -43,7 +43,7 @@ class Cache:
 
     def _queryIndividual(obj, collection):
         if obj.guid: return [collection.(obj.guid)]
-        matches = Object.array()
+        matches = $[]
         for other in collection.values():
             match = true
             for [key, value] in obj.enumerate():

@@ -47,11 +47,11 @@ class_ SimiSyncModels:
                 className = ClassCode(modelClass).name
                 classComposer = ClassComposer(className)
                 clientMappers = $[]
-                toLines = Object.array() # lines for function that maps server models to client
+                toLines = $[] # lines for function that maps server models to client
                 toLines.append("[f = def ():")
-                fromLines = Object.array() # lines for function that maps client models to server
+                fromLines = $[] # lines for function that maps client models to server
                 fromLines.append("[f = def (client):")
-                methodsAdded = Object.array()
+                methodsAdded = $[]
                 for e in modelClass.methods().enumerate():
                     for method in e.value:
                         if not @extractAnnot(method, SimiSyncModels.Method): continue

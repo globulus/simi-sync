@@ -45,6 +45,7 @@
 }
 
 - (id<SMSimiProperty>)callWithSMBlockInterpreter:(id<SMBlockInterpreter>)interpreter
+                           withSMSimiEnvironment:(id<SMSimiEnvironment>)environment
                                 withJavaUtilList:(id<JavaUtilList>)arguments
                                      withBoolean:(jboolean)rethrow {
     self.callback([[arguments getWithInt:0] getValue]);
@@ -57,6 +58,18 @@
 
 - (NSString *)toCodeWithInt:(jint)indentationLevel withBoolean:(jboolean)ignoreFirst {
     return nil;
+}
+
+- (NSString *)getFileName {
+    return nil;
+}
+
+- (jboolean)hasBreakPoint {
+    return false;
+}
+
+- (jint)getLineNumber {
+    return 0;
 }
 
 @end

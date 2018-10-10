@@ -166,18 +166,16 @@ When your server is booted, SimiSyncControllers class will autogenerate a *Clien
 class$ ClientTasks:
     def postLogin(body is User, success is Function, error is Function):
        url = SimiSync.baseUrl + "/login"
-       Net.post([url = url, json = ivic body, headers = []], def response:
-          if response.code in [200, 201]: success(response)
-          else: error(response)
-       end)
+       response = yield Net.post([url = url, json = ivic body, headers = []])
+       if response.code in [200, 201]: success(response)
+       else: error(response)
     end
 
     def deleteBeers(guid is String, simiCookie is String, success is Function, error is Function):
        url = SimiSync.baseUrl + "/beers/$guid".replacing("$guid", guid)
-       Net.delete([url = url, json = ivic body, headers = [simiCookie=simiCookie]], def response:
-          if response.code in [200]: success(response)
-          else: error(response)
-       end)
+       response = yield Net.delete([url = url, json = ivic body, headers = [simiCookie=simiCookie]])
+       if response.code in [200]: success(response)
+       else: error(response)
     end
 end
 ```

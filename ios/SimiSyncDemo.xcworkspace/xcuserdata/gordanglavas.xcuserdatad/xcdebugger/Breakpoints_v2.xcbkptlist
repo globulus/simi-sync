@@ -458,7 +458,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/Interpreter.m"
-            timestampString = "560855200.477239"
+            timestampString = "560858002.024861"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "928"
@@ -474,7 +474,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/Interpreter.m"
-            timestampString = "560855200.478296"
+            timestampString = "560858002.025092"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1095"
@@ -934,11 +934,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/Interpreter.m"
-            timestampString = "560855200.479261"
+            timestampString = "560858002.0254869"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1662"

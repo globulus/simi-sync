@@ -197,10 +197,9 @@ class_ SimiSyncControllers:
 
             successCodes = clientTask.successCodes ?? [200]
             successCodesString = ivic successCodes
-            composer.line("Net.\(route.verb.lowerCased())([url = url, json = ivic body, headers = \(headersString)], def response:")
-            composer.line("   if response.code in \(successCodesString.substring(0, successCodesString.len() - 1)): success(response)")
-            composer.line("   else: error(response)")
-            composer.line("end)")
+            composer.line("response = yield Net.\(route.verb.lowerCased())([url = url, json = ivic body, headers = \(headersString)])")
+            composer.line("if response.code in \(successCodesString.substring(0, successCodesString.len() - 1)): success(response)")
+            composer.line("else: error(response)")
             return composer.getString()
         end
 

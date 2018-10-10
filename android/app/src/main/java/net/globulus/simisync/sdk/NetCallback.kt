@@ -1,15 +1,15 @@
 package net.globulus.simisync.sdk
 
-import net.globulus.simi.api.BlockInterpreter
-import net.globulus.simi.api.SimiCallable
-import net.globulus.simi.api.SimiProperty
-import net.globulus.simi.api.SimiValue
+import net.globulus.simi.api.*
 
 class NetCallback(private val success: (SimiValue) -> Unit, private val error: (SimiValue) -> Unit) {
     fun getSuccessCallable(): SimiValue.Callable {
         return SimiValue.Callable(object : SimiCallable {
-            override fun call(p0: BlockInterpreter?, p1: MutableList<SimiProperty>?, p2: Boolean): SimiProperty? {
-                success(p1!![0].value)
+            override fun call(interpreter: BlockInterpreter?,
+                              environment: SimiEnvironment?,
+                              arguments: MutableList<SimiProperty>?,
+                              ethrow: Boolean): SimiProperty? {
+                success(arguments!![0].value)
                 return null
             }
 
@@ -20,8 +20,11 @@ class NetCallback(private val success: (SimiValue) -> Unit, private val error: (
     }
     fun getErrorCallable(): SimiValue.Callable {
         return SimiValue.Callable(object : SimiCallable {
-            override fun call(p0: BlockInterpreter?, p1: MutableList<SimiProperty>?, p2: Boolean): SimiProperty? {
-                success(p1!![0].value)
+            override fun call(interpreter: BlockInterpreter?,
+                              environment: SimiEnvironment?,
+                              arguments: MutableList<SimiProperty>?,
+                              rethrow: Boolean): SimiProperty? {
+                error(arguments!![0].value)
                 return null
             }
 

@@ -33,7 +33,7 @@ class BeerController:
     !SimiSyncControllers.ClientTask(1, [String], ["simiCookie"], nil, nil)
     def delete(request):
         impl = def user:
-            beer = DbHelper.orm().query(Beer(request.path.guid, user.guid)).first()
+            beer = DbHelper.orm().query(Beer).where("guid = '\(request.path.guid)' and user = '\(user.guid)'").first()
             if beer:
                 DbHelper.orm().delete(beer)
                 return ""

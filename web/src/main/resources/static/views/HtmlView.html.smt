@@ -1,5 +1,6 @@
  <html>
     <body>
+        <%# We show the cookie later because it's way to long %>
         <h3>Incoming headers (without cookie):</h3>
         <table>
             <tr>

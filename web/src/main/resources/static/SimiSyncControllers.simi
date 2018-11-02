@@ -46,7 +46,7 @@ class_ SimiSyncControllers:
                 # Read and interpret the content of the file
                 controllerCode = File.readString(file.path)
                 controllerClass = gu @removeImports(controllerCode)
-                for e in controllerClass.enumerate().where(def e: e.value is Function):
+                for e in controllerClass.zip().where(def e: e.value is Function):
                     if e.key.startsWith('_'): continue
                     value = controllerClass.(e.key)
                     route = @extractAnnot(value, SimiSyncControllers.Route)
@@ -110,7 +110,7 @@ class_ SimiSyncControllers:
         end
 
         def _matchRoute(route):
-            for [endpoint, func] in @router.(route.verb).enumerate():
+            for [endpoint, func] in @router.(route.verb).zip():
                 path = route.endpoint
                 smt = @renderer.(route.verb).(endpoint)
                 if endpoint == path: return [func = func, smt = smt]
@@ -121,7 +121,7 @@ class_ SimiSyncControllers:
                 # Check for matches amongst paths with components
                 matches = true
                 pathObj = $[]
-                for [i, component] in endpointSplit.enumerate():
+                for [i, component] in endpointSplit.zip():
                     pathComponent = pathSplit.(i)
                     pathObj.clear()
                     if component.startsWith('$'): pathObj.(component.substring(1)) = pathComponent # Remove starting $
@@ -198,7 +198,7 @@ class_ SimiSyncControllers:
             successCodes = clientTask.successCodes ?? [200]
             successCodesString = ivic successCodes
             composer.line("response = yield Net.\(route.verb.lowerCased())([url = url, json = ivic body, headers = \(headersString)])")
-            composer.line("if response.code in \(successCodesString.substring(0, successCodesString.len() - 1)): success(response)")
+            composer.line("if response is not Net.CallError and response.code in \(successCodesString.substring(0, successCodesString.len() - 1)): success(response)")
             composer.line("else: error(response)")
             return composer.getString()
         end

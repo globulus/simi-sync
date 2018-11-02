@@ -7,7 +7,7 @@
                 <th>Key</th>
                 <th>Value</th>
             </tr>
-            %%for [key, value] in request.headers.enumerate():
+            %%for [key, value] in request.headers.zip():
                 %%if key != "cookie":
                     <tr>
                         <td><%=key%></td>

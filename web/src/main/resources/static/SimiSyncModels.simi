@@ -52,7 +52,7 @@ class_ SimiSyncModels:
                 fromLines = $[] # lines for function that maps client models to server
                 fromLines.append("[f = def (client):")
                 methodsAdded = $[]
-                for e in modelClass.methods().enumerate():
+                for e in modelClass.methods().zip():
                     for method in e.value:
                         if not @extractAnnot(method, SimiSyncModels.Method): continue
                         methodsAdded.append(e.key)

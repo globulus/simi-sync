@@ -23,4 +23,11 @@ class Net:
         end
         return gu Async.swl(lines)
     end
+
+    class CallError(Exception):
+        def init(response):
+            @response = response
+            @message = response.toString()
+        end
+    end
 end

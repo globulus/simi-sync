@@ -12,7 +12,7 @@ class Net:
         common = Async.KEYWORD + " Net."
         lines = (ivic f).replacing(@KEYWORD_POST, common + "post(").split("\n").clone(false)
         open = 0
-        for e in lines.enumerate():
+        for e in lines.zip():
             [i, line] = e
             if line.endsWith("["): open += 1
             elsif line.endsWith("]"):
@@ -22,5 +22,12 @@ class Net:
             elsif common in line: lines.(i) = line + ")"
         end
         return gu Async.swl(lines)
+    end
+
+    class CallError(Exception):
+        def init(response):
+            @response = response
+            @message = response.toString()
+        end
     end
 end

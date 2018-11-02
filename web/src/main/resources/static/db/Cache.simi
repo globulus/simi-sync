@@ -46,7 +46,7 @@ class Cache:
         matches = $[]
         for other in collection.values():
             match = true
-            for [key, value] in obj.enumerate():
+            for [key, value] in obj.zip():
                 if value != other.(key):
                     match $= false
                     break

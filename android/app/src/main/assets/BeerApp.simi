@@ -1,6 +1,6 @@
 class_ BeerApp:
     def login(un, pw, success, error):
-        ClientTasks.postLogin(User(un, pw), def r:
+        ClientTasks.postLogin(User(un, pw), def r: # BP
             cookie = r.body
             print "Got cookie \(cookie)"
             ClientTasks.getBrands(def brands:

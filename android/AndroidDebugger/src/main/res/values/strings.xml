@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Android Debugger</string>
+    <string name="input_command">Input command</string>
+</resources>

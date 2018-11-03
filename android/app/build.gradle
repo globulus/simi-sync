@@ -47,4 +47,5 @@ dependencies {
     annotationProcessor 'com.github.globulus.easyprefs:easyprefs-processor:15543b1a8c'
     implementation 'com.github.globulus.easyparcel:easyparcel:2d128ed14d'
     implementation 'com.github.globulus.easyprefs:easyprefs:15543b1a8c'
+    compile project(path: ':AndroidDebugger')
 }

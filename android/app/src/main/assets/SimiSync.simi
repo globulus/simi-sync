@@ -15,7 +15,7 @@ class_ SimiSync:
             filesToEval = $[]
             body = gu response.body
             print body
-            for e in body.enumerate():
+            for e in body.zip():
                 filesToEval.append(@_writeFile(outputDir, e.key, e.value))
             end
             success(filesToEval)

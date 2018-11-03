@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import net.globulus.easyprefs.EasyPrefs
 import net.globulus.simi.ActiveSimi
 import net.globulus.simi.SimiMapper
+import net.globulus.simi.android.debugger.AndroidInterface
 import net.globulus.simi.api.SimiValue
 import net.globulus.simisync.sdk.NetCallback
 import java.io.File
@@ -44,6 +45,7 @@ class LoginActivity : AppCompatActivity() {
             false
         })
         email_sign_in_button.setOnClickListener { attemptLogin() }
+        ActiveSimi.setDebugMode(true, AndroidInterface.sharedInstance(this))
         ActiveSimi.setImportResolver(object : ActiveSimi.ImportResolver {
             override fun useApiClassName(p0: String?): Boolean {
                 return false
@@ -109,22 +111,23 @@ class LoginActivity : AppCompatActivity() {
 //            }
         })
         ActiveSimi.load("SimiSync.simi")
-        ActiveSimi.eval("SimiSync", "configure", SimiValue.String("http://10.0.2.2:8888"), SimiValue.Number(1L))
-        val callback = NetCallback({ response ->
-            val filesToEval = SimiMapper.fromArray(response.`object`)
-            println(filesToEval.toString())
-            val strArray = filesToEval.map { it as String }.toTypedArray()
-            ActiveSimi.load(*strArray)
-        }, { response ->
-            println(SimiMapper.fromObject(response.`object`).toString())
-        })
-        try {
-            ActiveSimi.eval("SimiSync", "sync", SimiValue.String(filesDir.absolutePath),
-                    callback.getSuccessCallable(), callback.getErrorCallable())
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        ActiveSimi.load("BeerApp.simi")
+        ActiveSimi.evalAsync(ActiveSimi.Callback {
+            val callback = NetCallback({ response ->
+                val filesToEval = SimiMapper.fromArray(response.`object`)
+                println(filesToEval.toString())
+                val strArray = filesToEval.map { it as String }.toTypedArray()
+                ActiveSimi.load(*strArray)
+            }, { response ->
+                println(SimiMapper.fromObject(response.`object`).toString())
+            })
+            try {
+                ActiveSimi.eval("SimiSync", "sync", SimiValue.String(filesDir.absolutePath),
+                        callback.getSuccessCallable(), callback.getErrorCallable())
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            ActiveSimi.load("BeerApp.simi")
+        }, "SimiSync", "configure", SimiValue.String("http://10.0.2.2:8888"), SimiValue.Number(1L))
     }
 
     /**
@@ -178,8 +181,11 @@ class LoginActivity : AppCompatActivity() {
             }, { response ->
                 println(SimiMapper.fromObject(response.`object`).toString())
             })
-            ActiveSimi.eval("BeerApp", "login", SimiValue.String(emailStr), SimiValue.String(passwordStr),
-                    callback.getSuccessCallable(), callback.getErrorCallable())
+            Thread(Runnable {
+                ActiveSimi.eval("BeerApp", "login", SimiValue.String(emailStr), SimiValue.String(passwordStr),
+                        callback.getSuccessCallable(), callback.getErrorCallable())
+            }).start()
+
         }
     }
 

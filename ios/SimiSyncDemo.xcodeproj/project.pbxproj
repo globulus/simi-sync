@@ -27,6 +27,7 @@
 		6AF83E0E208A7A31005CA323 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AF83E0D208A7A31005CA323 /* Assets.xcassets */; };
 		6AF83E11208A7A31005CA323 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AF83E0F208A7A31005CA323 /* LaunchScreen.storyboard */; };
 		6AF83E14208A7A31005CA323 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF83E13208A7A31005CA323 /* main.m */; };
+		6AFE3F6D21905CFE00837334 /* SimiDebuggerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AFE3F6C21905CFE00837334 /* SimiDebuggerViewController.xib */; };
 		9DC4C65CB7D7C83ACED6611C /* libPods-SimiCalc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1B2F8A1D06BA8A691E6A64 /* libPods-SimiCalc.a */; };
 /* End PBXBuildFile section */
 
@@ -144,6 +145,7 @@
 		6AF83E10208A7A31005CA323 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6AF83E12208A7A31005CA323 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6AF83E13208A7A31005CA323 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6AFE3F6C21905CFE00837334 /* SimiDebuggerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SimiDebuggerViewController.xib; sourceTree = "<group>"; };
 		8C4CFA0DC5E3706D640DFE65 /* Pods-SimiCalc.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimiCalc.release.xcconfig"; path = "Pods/Target Support Files/Pods-SimiCalc/Pods-SimiCalc.release.xcconfig"; sourceTree = "<group>"; };
 		9F1B2F8A1D06BA8A691E6A64 /* libPods-SimiCalc.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SimiCalc.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC835EE295D65B4E51036A1B /* Pods-SimiCalc.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimiCalc.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimiCalc/Pods-SimiCalc.debug.xcconfig"; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 		6A981A652125BDE900ED3FF4 /* SimiSyncSdk */ = {
 			isa = PBXGroup;
 			children = (
+				6AFE3F6C21905CFE00837334 /* SimiDebuggerViewController.xib */,
 				6A981A672125BDE900ED3FF4 /* NetCallback.h */,
 				6A981A662125BDE900ED3FF4 /* NetCallback.m */,
 				6A981A6B2125BE1300ED3FF4 /* SimiSyncManager.h */,
@@ -398,6 +401,7 @@
 			files = (
 				6A5270E3212569BB0066F33B /* SimiSync.simi in Resources */,
 				6A5270F7212578990066F33B /* File.simi in Resources */,
+				6AFE3F6D21905CFE00837334 /* SimiDebuggerViewController.xib in Resources */,
 				6AF83E11208A7A31005CA323 /* LaunchScreen.storyboard in Resources */,
 				6A5270E4212569BB0066F33B /* BeerApp.simi in Resources */,
 				6AF83E0E208A7A31005CA323 /* Assets.xcassets in Resources */,

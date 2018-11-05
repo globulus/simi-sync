@@ -41,10 +41,14 @@ class LoginViewController: UIViewController {
         let loginCallback = NetCallback(success: { (response) in
             let cookie = response?.getString()
             UserDefaults.standard.set(cookie, forKey: "cookie")
-            self.performSegue(withIdentifier: "segLogin2Beers", sender: self)
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "segLogin2Beers", sender: self)
+            }
         }) { (response) in
             print("Login error")
         }!
-        SMActiveSimi.eval(with: "BeerApp", with: "login", withSMSimiPropertyArray: IOSObjectArray(nsArray: [SMSimiMapper.toSimiProperty(withId: self.email.text), SMSimiMapper.toSimiProperty(withId: self.password.text), loginCallback.success, loginCallback.error], type: SMSimiProperty_class_()))
+        DispatchQueue.global(qos: .background).async {
+            SMActiveSimi.eval(with: "BeerApp", with: "login", withSMSimiPropertyArray: IOSObjectArray(nsArray: [SMSimiMapper.toSimiProperty(withId: self.email.text), SMSimiMapper.toSimiProperty(withId: self.password.text), loginCallback.success, loginCallback.error], type: SMSimiProperty_class_()))
+        }
     }
 }

@@ -314,7 +314,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/SimiValue.m"
-            timestampString = "560799231.739347"
+            timestampString = "563100551.839514"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "247"
@@ -362,7 +362,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/SimiValue.m"
-            timestampString = "560799231.739583"
+            timestampString = "563100551.8396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "250"
@@ -410,7 +410,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/SimiValue.m"
-            timestampString = "560799231.739635"
+            timestampString = "563100551.83964"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "248"
@@ -458,7 +458,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/Interpreter.m"
-            timestampString = "560858002.024861"
+            timestampString = "563100637.922482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "928"
@@ -474,12 +474,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/Interpreter.m"
-            timestampString = "560858002.025092"
+            timestampString = "563100637.922732"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1095"
             endingLineNumber = "1095"
-            landmarkName = "-visitGuExprWithSMExpr_Gu:"
+            landmarkName = "-visitGetExprWithSMExpr_Get:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -490,7 +490,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/Scanner.m"
-            timestampString = "560799231.739965"
+            timestampString = "563100637.922822"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "542"
@@ -506,7 +506,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/SimiValue.m"
-            timestampString = "560799231.740164"
+            timestampString = "563100551.839784"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "324"
@@ -554,7 +554,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/Scanner.m"
-            timestampString = "560799231.7402149"
+            timestampString = "563100637.923"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "625"
@@ -570,7 +570,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/SimiValue.m"
-            timestampString = "560799231.7402641"
+            timestampString = "563100551.839848"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "319"
@@ -778,7 +778,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/SimiValue.m"
-            timestampString = "560799231.740806"
+            timestampString = "563100551.840211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "249"
@@ -826,7 +826,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/SimiValue.m"
-            timestampString = "560799231.740859"
+            timestampString = "563100551.8402489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "273"
@@ -890,11 +890,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SimiSyncDemo/SimiSyncSdk/SimiSyncManager.m"
-            timestampString = "560799231.741094"
+            timestampString = "563111940.011176"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "-bootWithBaseUrl:version:callback:"
             landmarkType = "7">
          </BreakpointContent>
@@ -938,13 +938,316 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/Interpreter.m"
-            timestampString = "560858002.0254869"
+            timestampString = "563100637.926096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1662"
             endingLineNumber = "1662"
-            landmarkName = "SMInterpreter_callWithSMSimiValue_withSMToken_withJavaUtilList_"
+            landmarkName = "SMInterpreter_evaluateWithSMExpr_withNSObjectArray_"
             landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/IOSDebugger.m"
+            timestampString = "563111940.011749"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "-launchViewController"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/IOSDebugger.m"
+            timestampString = "563111940.012001"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "-getQueue"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/IOSDebugger.m"
+            timestampString = "563111940.0120749"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "-read"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/SimiDebuggerViewController.m"
+            timestampString = "563111940.012146"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/SimiDebuggerViewController.m"
+            timestampString = "563111940.012362"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/IOSDebugger.m"
+            timestampString = "563111940.0124249"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "-launchViewController"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[IOSDebugger launchViewController]"
+                  moduleName = "SimiSyncDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gordanglavas/Desktop/github/simi-ios/SimiLib/iOSSimi/iOSSimi/IOSDebugger.m"
+                  timestampString = "563108815.687454"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "67">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__35-[IOSDebugger launchViewController]_block_invoke"
+                  moduleName = "SimiSyncDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gordanglavas/Desktop/github/simi-ios/SimiLib/iOSSimi/iOSSimi/IOSDebugger.m"
+                  timestampString = "563108815.690493"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/SimiDebuggerViewController.m"
+            timestampString = "563111940.0124871"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "-textFieldShouldReturn:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/Debugger.m"
+            timestampString = "563111940.01255"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "470"
+            endingLineNumber = "470"
+            landmarkName = "SMDebugger_scanInput"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/net/globulus/simi/Debugger.m"
+            timestampString = "563111940.012778"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "471"
+            endingLineNumber = "471"
+            landmarkName = "SMDebugger_scanInput"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/IOSDebugger.m"
+            timestampString = "563111940.01284"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "-printlnWithNSString:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/IOSDebugger.m"
+            timestampString = "563111940.012895"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "-resume"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/IOSDebugger.m"
+            timestampString = "563111940.012948"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "-resume"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[IOSDebugger resume]"
+                  moduleName = "SimiSyncDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gordanglavas/Desktop/github/simi-ios/SimiLib/iOSSimi/iOSSimi/IOSDebugger.m"
+                  timestampString = "563109911.636425"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96"
+                  offsetFromSymbolStart = "27">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__21-[IOSDebugger resume]_block_invoke"
+                  moduleName = "SimiSyncDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gordanglavas/Desktop/github/simi-ios/SimiLib/iOSSimi/iOSSimi/IOSDebugger.m"
+                  timestampString = "563109911.6401989"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_"
+                  moduleName = "SimiSyncDemo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/gordanglavas/Desktop/github/simi-ios/SimiLib/iOSSimi/iOSSimi/IOSDebugger.m"
+                  timestampString = "563109911.643213"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/IOSDebugger.m"
+            timestampString = "563111940.012996"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "-resume"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../simi-ios/SimiLib/iOSSimi/iOSSimi/SimiDebuggerViewController.m"
+            timestampString = "563111940.013049"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "-printlnWithNSString:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

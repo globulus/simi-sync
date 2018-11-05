@@ -5,10 +5,12 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import net.globulus.simi.Debugger
+import java.util.concurrent.ArrayBlockingQueue
+import java.util.concurrent.BlockingQueue
 
 class AndroidInterface private constructor(private val mContext: Context) : Debugger.DebuggerInterface {
 
-    private val mLock = Object()
+    private val mQueue = ArrayBlockingQueue<String>(10)
     private var mBoundActivity: DebuggerActivity? = null
     private var mLaunchingActivity = false
     private var mBuffer = StringBuilder()
@@ -57,15 +59,11 @@ class AndroidInterface private constructor(private val mContext: Context) : Debu
     }
 
     override fun read(): String? {
-        if (mBoundActivity == null) {
-            return null
-        }
-        return mBoundActivity!!.read()
+        return null
     }
 
-
-    override fun getLock(): Object {
-        return mLock
+    override fun getQueue(): BlockingQueue<String> {
+        return mQueue
     }
 
     override fun resume() {

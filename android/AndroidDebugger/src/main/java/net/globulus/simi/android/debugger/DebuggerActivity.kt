@@ -6,6 +6,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_debugger.*
 import net.globulus.simi.Debugger
+import java.util.concurrent.BlockingQueue
 
 class DebuggerActivity : AppCompatActivity(), Debugger.DebuggerInterface {
 
@@ -13,8 +14,6 @@ class DebuggerActivity : AppCompatActivity(), Debugger.DebuggerInterface {
         const val BUNDLE_PRINT = "print"
         const val BUNDLE_PRINTLN = "println"
     }
-
-    private var mInput: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,11 +33,9 @@ class DebuggerActivity : AppCompatActivity(), Debugger.DebuggerInterface {
 
         input.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                mInput = input.text.toString()
+                val inputText = input.text.toString()
                 input.setText("")
-                synchronized(lock) {
-                    lock.notify()
-                }
+                queue.put(inputText)
                 return@OnEditorActionListener true
             }
             false
@@ -63,13 +60,11 @@ class DebuggerActivity : AppCompatActivity(), Debugger.DebuggerInterface {
     }
 
     override fun read(): String? {
-        val inputCopy = mInput
-        mInput = null
-        return inputCopy
+        return null
     }
 
-    override fun getLock(): Object {
-        return AndroidInterface.sharedInstance(this).lock
+    override fun getQueue(): BlockingQueue<String> {
+        return AndroidInterface.sharedInstance(this).queue
     }
 
     override fun resume() {

@@ -11,7 +11,6 @@ import java.util.concurrent.BlockingQueue
 class DebuggerActivity : AppCompatActivity(), Debugger.DebuggerInterface {
 
     companion object {
-        const val BUNDLE_PRINT = "print"
         const val BUNDLE_PRINTLN = "println"
     }
 
@@ -21,14 +20,9 @@ class DebuggerActivity : AppCompatActivity(), Debugger.DebuggerInterface {
 
         AndroidInterface.sharedInstance(this).setBoundActivity(this)
 
-        val print = intent.extras.getString(BUNDLE_PRINT)
-        if (print != null) {
-            print(print)
-        } else {
-            val println = intent.extras.getString(BUNDLE_PRINTLN)
-            if (println != null) {
-                println(println)
-            }
+        val println = intent.extras.getString(BUNDLE_PRINTLN)
+        if (println != null) {
+            flush(println)
         }
 
         input.setOnEditorActionListener(TextView.OnEditorActionListener { v, actionId, event ->
@@ -47,15 +41,9 @@ class DebuggerActivity : AppCompatActivity(), Debugger.DebuggerInterface {
         super.finish()
     }
 
-    override fun print(s: String?) {
+    override fun flush(s: String?) {
         runOnUiThread {
             output.append(s)
-        }
-    }
-
-    override fun println(s: String?) {
-        runOnUiThread {
-            output.append(s + "\n")
         }
     }
 

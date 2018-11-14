@@ -28,33 +28,21 @@ class AndroidInterface private constructor(private val mContext: Context) : Debu
     internal fun setBoundActivity(activity: DebuggerActivity?) {
         mBoundActivity = activity
         if (mBoundActivity != null) {
-            mBoundActivity!!.print(mBuffer.toString())
+            mBoundActivity!!.flush(mBuffer.toString())
             mLaunchingActivity = false
             mBuffer = StringBuilder()
         }
     }
 
-    override fun print(s: String) {
+    override fun flush(s: String) {
         if (mBoundActivity == null) {
             if (mLaunchingActivity) {
-                mBuffer.append(s)
-            } else {
-                launchActivity(DebuggerActivity.BUNDLE_PRINT, s)
-            }
-        } else {
-            mBoundActivity!!.print(s)
-        }
-    }
-
-    override fun println(s: String) {
-        if (mBoundActivity == null) {
-            if (mLaunchingActivity) {
-                mBuffer.appendln(s)
+                mBuffer.append(s).append("\n")
             } else {
                 launchActivity(DebuggerActivity.BUNDLE_PRINTLN, s)
             }
         } else {
-            mBoundActivity!!.println(s)
+            mBoundActivity!!.flush(s)
         }
     }
 

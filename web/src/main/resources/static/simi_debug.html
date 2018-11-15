@@ -21,7 +21,7 @@
                 type: "POST",
                 success: function(response) {
                     var output = $("#output");
-                    output.html(output.html + "<br/>" + response.replace("\n", "<br/>"));
+                    output.html(output.html() + "<br/>" + response.replace(/(?:\r\n|\r|\n)/g, "<br/>"));
                 }
             });
         }

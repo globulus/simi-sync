@@ -7,10 +7,7 @@ import net.globulus.simi.api.SimiObject;
 import net.globulus.simi.api.SimiProperty;
 import net.globulus.simi.api.SimiValue;
 import net.globulus.simisync.BrowserInterface;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.ResourceLoader;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +24,8 @@ import java.util.stream.Collectors;
 @RestController
 public class SimiSyncController {
 
+    private static ResponseEntity<String> debugPageResponse;
+
     @RequestMapping("/**")
     public ResponseEntity<String> route(HttpServletRequest request, HttpServletResponse response) {
         String body = null;
@@ -41,11 +40,14 @@ public class SimiSyncController {
         String endpoint = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 
         if (endpoint.equals("/simi/debug")) {
-            try (Scanner s = new Scanner(new ClassPathResource("static/simi_debug.html").getInputStream())) {
-                return ResponseEntity.ok(s.useDelimiter("\\A").hasNext() ? s.next() : "");
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (debugPageResponse == null) {
+                try (Scanner s = new Scanner(new ClassPathResource("static/simi_debug.html").getInputStream())) {
+                    debugPageResponse = ResponseEntity.ok(s.useDelimiter("\\A").hasNext() ? s.next() : "");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+            return debugPageResponse;
         } else if (endpoint.equals("/simi/debug/post")) {
             Debugger.DebuggerInterface debuggerInterface = ActiveSimi.getDebuggerInterface();
             if (debuggerInterface instanceof BrowserInterface) {
@@ -56,7 +58,7 @@ public class SimiSyncController {
                 } else {
                     try {
                         bi.getQueue().put(body);
-                        return ResponseEntity.ok(((BrowserInterface) debuggerInterface).getOutputQueue().take());
+                        return ResponseEntity.ok(bi.getOutputQueue().take());
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

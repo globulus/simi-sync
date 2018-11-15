@@ -1,7 +1,6 @@
 package net.globulus.simisync;
 
 import net.globulus.simi.ActiveSimi;
-import net.globulus.simi.Debugger;
 import net.globulus.simi.api.SimiValue;
 import net.globulus.simi.spring.ResourceLoaderWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,6 @@ import org.springframework.util.StreamUtils;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
 
 @SpringBootApplication
 public class SimiSyncApplication {

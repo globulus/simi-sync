@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simi Debugger</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            post("");
+        });
+
+        $(document).on("click", "#send", function() {
+           post($("#input").val());
+        });
+
+        function post(data) {
+            $.ajax({
+                url: window.location.href + "/post",
+                contentType: "text/plain",
+                data: data,
+                type: "POST",
+                success: function(response) {
+                    var output = $("#output");
+                    output.html(output.html + "<br/>" + response.replace("\n", "<br/>"));
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div style="margin: 50px 10%;">
+        <input type="text" id="input" width="200" />
+        <button id="send" type="button">Send debugger command</button>
+    </div>
+    <br /><br />
+    <div id="output" style="overflow: auto; width:500px; height:500px;">
+
+    </div>
+</body>
+</html>

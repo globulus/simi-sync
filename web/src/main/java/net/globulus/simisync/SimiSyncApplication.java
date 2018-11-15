@@ -14,6 +14,8 @@ import org.springframework.util.StreamUtils;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 
 @SpringBootApplication
 public class SimiSyncApplication {
@@ -23,7 +25,7 @@ public class SimiSyncApplication {
 
 	public static void main(String[] args) {
 		ResourceLoaderWrapper resourceLoaderWrapper = new ResourceLoaderWrapper(resourceLoader);
-		ActiveSimi.setDebugMode(true, new Debugger.ConsoleInterface());
+		ActiveSimi.setDebugMode(true, new BrowserInterface());
 		ActiveSimi.setImportResolver(new ActiveSimi.ImportResolver() {
 			@Override
 			public String readFile(String s) {

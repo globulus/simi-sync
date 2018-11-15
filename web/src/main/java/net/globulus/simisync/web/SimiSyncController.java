@@ -1,10 +1,15 @@
 package net.globulus.simisync.web;
 
 import net.globulus.simi.ActiveSimi;
+import net.globulus.simi.Debugger;
 import net.globulus.simi.SimiMapper;
 import net.globulus.simi.api.SimiObject;
 import net.globulus.simi.api.SimiProperty;
 import net.globulus.simi.api.SimiValue;
+import net.globulus.simisync.BrowserInterface;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 @RestController
@@ -33,6 +39,31 @@ public class SimiSyncController {
             }
         }
         String endpoint = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+
+        if (endpoint.equals("/simi/debug")) {
+            try (Scanner s = new Scanner(new ClassPathResource("static/simi_debug.html").getInputStream())) {
+                return ResponseEntity.ok(s.useDelimiter("\\A").hasNext() ? s.next() : "");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (endpoint.equals("/simi/debug/post")) {
+            Debugger.DebuggerInterface debuggerInterface = ActiveSimi.getDebuggerInterface();
+            if (debuggerInterface instanceof BrowserInterface) {
+                BrowserInterface bi = (BrowserInterface) debuggerInterface;
+                if (body == null || body.isEmpty()) {
+                    String queuedResponse = bi.getOutputQueue().poll();
+                    return ResponseEntity.ok((queuedResponse != null) ? queuedResponse : "");
+                } else {
+                    try {
+                        bi.getQueue().put(body);
+                        return ResponseEntity.ok(((BrowserInterface) debuggerInterface).getOutputQueue().take());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+
         HashMap<String, Object> headers = new HashMap<>();
         for (String header : Collections.list(request.getHeaderNames())) {
             headers.put(header, request.getHeader(header));

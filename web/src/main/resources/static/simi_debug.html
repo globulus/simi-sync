@@ -22,6 +22,8 @@
                 success: function(response) {
                     var output = $("#output");
                     output.html(output.html() + "<br/>" + response.replace(/(?:\r\n|\r|\n)/g, "<br/>"));
+                    output.scrollTop(function() { return this.scrollHeight; });
+                    $("#input").val("");
                 }
             });
         }

@@ -57,7 +57,7 @@ public class SimiSyncController {
                     return ResponseEntity.ok((queuedResponse != null) ? queuedResponse : "");
                 } else {
                     try {
-                        bi.getQueue().put(body);
+                        bi.getInputQueue().put(body);
                         return ResponseEntity.ok(bi.getOutputQueue().take());
                     } catch (InterruptedException e) {
                         e.printStackTrace();

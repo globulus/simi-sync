@@ -29,7 +29,7 @@ public class BrowserInterface implements Debugger.DebuggerInterface {
     }
 
     @Override
-    public BlockingQueue<String> getQueue() {
+    public BlockingQueue<String> getInputQueue() {
         return inputQueue;
     }
 

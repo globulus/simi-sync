@@ -50,7 +50,7 @@ class AndroidInterface private constructor(private val mContext: Context) : Debu
         return null
     }
 
-    override fun getQueue(): BlockingQueue<String> {
+    override fun getInputQueue(): BlockingQueue<String> {
         return mQueue
     }
 

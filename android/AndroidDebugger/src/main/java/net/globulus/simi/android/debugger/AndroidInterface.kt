@@ -17,7 +17,6 @@ class AndroidInterface private constructor(private val mContext: Context) : Debu
 
     private fun launchActivity(command: String, text: String) {
         mLaunchingActivity = true
-        val a = Looper.myLooper() == Looper.getMainLooper()
         Handler(Looper.getMainLooper()).post {
             val intent = Intent(mContext, DebuggerActivity::class.java)
             intent.putExtra(command, text)

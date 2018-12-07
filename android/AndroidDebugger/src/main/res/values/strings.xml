@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">Android Debugger</string>
     <string name="input_command">Input command</string>
+    <string name="focus_env">Focus env</string>
+    <string name="global_env">Global env</string>
+    <string name="watch">Watch</string>
+    <string name="continue_">Continue</string>
+    <string name="evaluate">Evaluate</string>
+    <string name="step_into">Step into</string>
+    <string name="step_over">Step over</string>
+    <string name="add">Add</string>
+    <string name="remove">Remove</string>
+    <string name="exceptions">Exceptions</string>
+    <string name="input_expression_to_evaluate">Input expression to evaluate</string>
+    <string name="cancel">Cancel</string>
 </resources>

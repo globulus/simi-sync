@@ -38,5 +38,7 @@
     <div id="output" style="overflow: auto; width:500px; height:500px;">
 
     </div>
+    <%! listStyle = [header = :"<p>", row = def item: "<b>\(item)</b>", separator = :"<hr>"] %>
+    <%= ListView(watcher.callStack().map(def s: s.line), listStyle).render() %>
 </body>
 </html>

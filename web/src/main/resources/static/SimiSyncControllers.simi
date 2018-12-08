@@ -58,8 +58,8 @@ class_ SimiSyncControllers:
 
                     render = @extractAnnot(value, SimiSyncControllers.Render)
                     if render:
-                        templatePath = render.template ?? "\(dirPath)views/\(@_extractFileNameRoot(file))View.html.smt"
-                        smt = Smt.compile(File.readString(templatePath))
+                        templatePath = render.template ?? ("views/\(@_extractFileNameRoot(file))View.html.smt")
+                        smt = Smt.compile(File.readString("\(dirPath)\(templatePath)"))
                         if verb not in renderer: renderer.(verb) = $[]
                         renderer.(verb).(route.endpoint) = smt
                         composer = FunctionComposer.fromFunc(value, true)

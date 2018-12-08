@@ -39,7 +39,7 @@ public class SimiSyncController {
         }
         String endpoint = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 
-        if (endpoint.equals("/simi/debug")) {
+        /*if (endpoint.equals("/simi/debug")) {
             if (debugPageResponse == null) {
                 try (Scanner s = new Scanner(new ClassPathResource("static/simi_debug.html").getInputStream())) {
                     debugPageResponse = ResponseEntity.ok(s.useDelimiter("\\A").hasNext() ? s.next() : "");
@@ -48,7 +48,7 @@ public class SimiSyncController {
                 }
             }
             return debugPageResponse;
-        } else if (endpoint.equals("/simi/debug/post")) {
+        } else */if (endpoint.equals("/simi/debug/post")) {
             Debugger.DebuggerInterface debuggerInterface = ActiveSimi.getDebuggerInterface();
             if (debuggerInterface instanceof BrowserInterface) {
                 BrowserInterface bi = (BrowserInterface) debuggerInterface;

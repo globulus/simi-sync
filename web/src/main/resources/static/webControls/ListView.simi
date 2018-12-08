@@ -1,0 +1,19 @@
+class ListView:
+    def init(items is Object, props is Object): pass
+
+    def render():
+        html = String.builder()
+        html.add(@props.header() ?? "")
+        itemRenderer = @props.row ?? @_defaultItemRenderer
+        for item in @items:
+            html.add(itemRenderer(item))
+            html.add(@props.separator() ?? "")
+        end
+        html.add(@props.footer() ?? "")
+        return html.build()
+    end
+
+    def _defaultItemRenderer(item): return "\(item)<br/>"
+
+#    def render(): return "<p>\(String.from(@items, '<br/>'))"
+end

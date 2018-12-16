@@ -1,0 +1,18 @@
+class WebControl:
+    _DEFAULT_CONTAINER = "<div>$</div>"
+
+    def init(id is String, props is Object): pass
+
+    def render(): return @_renderContainerAndId("")
+
+    def _renderContainerAndId(html is String):
+        container = @props.container() ?? @_DEFAULT_CONTAINER
+        content = container.replacing("$", html)
+        if @id:
+            start = content.substring(0, content.indexOf('>'))
+            rest = content.substring(start.len() + 1)
+            return "\(start) id=\"\(@id)\">\(rest)"
+        end
+        else: return content
+    end
+end

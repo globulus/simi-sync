@@ -1,5 +1,8 @@
-class ListView:
+import "./webControls/WebControl.simi"
+
+class ListView(WebControl):
     def init(items is Object, props is Object): pass
+    def init(id is String, items is Object, props is Object): pass
 
     def render():
         html = String.builder()
@@ -10,10 +13,8 @@ class ListView:
             html.add(@props.separator() ?? "")
         end
         html.add(@props.footer() ?? "")
-        return html.build()
+        return @_renderContainerAndId(html.build())
     end
 
     def _defaultItemRenderer(item): return "\(item)<br/>"
-
-#    def render(): return "<p>\(String.from(@items, '<br/>'))"
 end

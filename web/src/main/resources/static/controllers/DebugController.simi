@@ -4,8 +4,5 @@ import "./webControls/ListView.simi"
 class DebugController:
        !SimiSyncControllers.Route("/simi/debug", "GET")
        !SimiSyncControllers.Render("simi_debug.html")
-       def renderDebug(request):
-           watcher = Debugger.watcher()
-           return request.smt.run$()
-       end
+       def renderDebug(request): pass
 end

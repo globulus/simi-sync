@@ -46,7 +46,7 @@ class Smt:
         var = "__var" + clock()
         body = String.builder().add("(def ():
             \(var) = String.builder()
-            \(trimmed.substring(@_STMT.len()))
+            \(@_replaceSets(trimmed.substring(@_STMT.len())))
         ")
         endCount = 1
         skip = 0
@@ -61,24 +61,19 @@ class Smt:
                 end
             end
             elsif tl.startsWith(@_STMT):
-                body.add(tl.substring(@_STMT.len())).add("\n")
+                body.add(@_replaceSets(tl.substring(@_STMT.len()))).add("\n")
                 endCount += 1
             end
             else:
                 for part in @_parseLine(line, i):
-                    partVal = nil
-                    if part is String: partVal $= "\"\(part)\""
-                    else:
-                        funcBody = ivic part
-                        partVal $= "(\(funcBody.substring(0, funcBody.len() - 1)))()"
-                    end
-                    body.add(var).add(".add(").add(partVal).add(")\n")
+                    body.add(var).add(".add(")\
+                        .add(ife(part is String, :"\"\(part)\"", :"\(part.code)$()"))\
+                        .add(")\n")
                 end
             end
         end
-        body.add("return \(var).build()
-        end)")
-        return [part = gu body.build(), skip = skip]
+        body.add("return \(var).build()\nend)")
+        return [part = [code = body.build()], skip = skip]
     end
 
     def _parseLine(line, idx):

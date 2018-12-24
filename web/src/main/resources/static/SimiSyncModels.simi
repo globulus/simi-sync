@@ -24,8 +24,7 @@ class_ SimiSyncModels:
     end
 
     # Model method annotation class
-    class_ Method:
-    end
+    class_ Method
 
     class_ ModelParser():
         import SimiSyncCommons.Parser

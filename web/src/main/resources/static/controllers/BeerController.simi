@@ -22,7 +22,7 @@ class BeerController:
                 newBeer = Beer()
                 newBeer.fromClientModel(beer)
                 newBeer.setUser(user)
-                DbHelper.orm().createOrUpdate(newBeer)
+                DbHelper.orm().upsert(newBeer)
             end
             return [code = 201, body = ""]
         end

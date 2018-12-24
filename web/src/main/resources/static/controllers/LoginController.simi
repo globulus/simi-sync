@@ -18,7 +18,7 @@ class LoginController:
             signup = User(guid(), credentials.email, credentials.password)
             signup.updateCookie()
             print "Signup " + signup
-            DbHelper.orm().createOrUpdate(signup)
+            DbHelper.orm().upsert(signup)
             return [code = 201, body = signup.cookie]
         end
     end

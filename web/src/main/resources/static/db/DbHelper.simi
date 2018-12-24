@@ -7,9 +7,9 @@ class DbHelper:
             for clazz in [User, Brand, Beer]: @_orm.createTable(clazz)
             brands = @_orm.query(Brand).array()
             if brands.isEmpty():
-                @_orm.createOrUpdate(Brand(guid(), "Osjecko", 0.5))
-                @_orm.createOrUpdate(Brand(guid(), "Karlovacko", 0.5))
-                @_orm.createOrUpdate(Brand(guid(), "Ozujsko", 0.33))
+                @_orm.upsert(Brand(guid(), "Osjecko", 0.5))
+                @_orm.upsert(Brand(guid(), "Karlovacko", 0.5))
+                @_orm.upsert(Brand(guid(), "Ozujsko", 0.33))
             end
         end
         return @_orm

@@ -16,5 +16,5 @@ class ListView(WebControl):
         return @_renderContainerAndId(html.build())
     end
 
-    def _defaultItemRenderer(item): return "\(item)<br/>"
+    def _defaultItemRenderer(item): "\(item)<br/>"
 end

@@ -21,6 +21,6 @@ class$ Brand:
     def init(guid is String, name is String, size is Number): pass
 
     class_ Mapper(SimiSyncModels.ClientMapper):
-        def init(): @init("0", def b: return b.guid, def s: return Cache.singleton.find("Brand", s))
+        def init(): @init("0", def b: return b.guid, def s: Cache.singleton.find("Brand", s))
     end
 end

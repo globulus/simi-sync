@@ -32,9 +32,9 @@ class Cache:
         return @_queryIndividual(obj, @_collection(obj))
     end
 
-    def queryAll(clazz): return @_db.(ClassCode(clazz).name).values()
+    def queryAll(clazz): @_db.(ClassCode(clazz).name).values()
 
-    def find(className, guid): return @_db.(className).(guid)
+    def find(className, guid): @_db.(className).(guid)
 
     def findUser(request):
         cookie = request.headers.simiCookie ?? request.headers.simicookie
@@ -57,5 +57,5 @@ class Cache:
         return matches
     end
 
-    def _collection(obj): return @_db.(ClassCode(obj.("class")).name)
+    def _collection(obj): @_db.(ClassCode(obj.("class")).name)
 end
